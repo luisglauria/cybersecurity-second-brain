@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-09-10T00:00:00-03:00",
+  "coverage_window": "Aguardando a primeira execução cloud",
+  "executive_summary": "O workflow está pronto para coletar fontes, filtrar sinais e publicar o primeiro briefing.",
+  "signals": [],
+  "experiment": {
+    "title": "Preparar o laboratório local",
+    "objective": "Definir um ambiente autorizado para os experimentos diários.",
+    "prerequisites": ["Docker ou uma VM local", "Um diretório separado para evidências"],
+    "steps": ["Criar um diretório de laboratório", "Registrar o escopo permitido", "Escolher uma aplicação intencionalmente vulnerável"],
+    "expected_evidence": ["Escopo documentado", "Ambiente isolado e reproduzível"],
+    "stop_condition": "Interromper se o teste sair do laboratório autorizado."
+  },
+  "discarded": "Nenhum briefing executado ainda.",
+  "backlog": ["Configurar GEMINI_API_KEY no GitHub", "Ativar GitHub Pages", "Executar o workflow manualmente"],
+  "collection": {"items": 0, "failures": []},
+  "status": "empty"
+}
