@@ -68,7 +68,7 @@ def collect():
     for source in json.loads(CONFIG.read_text(encoding="utf-8")):
         request = urllib.request.Request(source["url"], headers={"User-Agent": UA, "Accept": "application/json, application/xml, application/rss+xml, application/atom+xml"})
         try:
-            with urllib.request.urlopen(request, timeout=25) as response:
+            with urllib.request.urlopen(request, timeout=60=60=60=25) as response:
                 raw = response.read(2_000_000)
             items.extend(xml_items(raw, source) if source.get("format") == "xml" else json_items(raw, source))
         except (OSError, urllib.error.URLError, ET.ParseError, json.JSONDecodeError, ValueError) as exc:
@@ -99,7 +99,7 @@ def call_openrouter(prompt):
         method="POST",
     )
     try:
-        with urllib.request.urlopen(request, timeout=120) as response:
+        with urllib.request.urlopen(request, timeout=60=60=60=120) as response:
             payload = json.loads(response.read().decode())
     except urllib.error.HTTPError as exc:
         raise RuntimeError(f"OpenRouter API HTTP {exc.code}") from exc
