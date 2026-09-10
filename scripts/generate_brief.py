@@ -50,7 +50,7 @@ def json_items(raw, source):
     payload = json.loads(raw.decode("utf-8", errors="replace"))
     values = payload.get("vulnerabilities", []) if isinstance(payload, dict) else payload
     result = []
-    for value in values[:int(source.get("max_items", 10))] if isinstance(values, list) else []:
+    for value in (values[:int(source.get("max_items", 10))] if isinstance(values, list) else []):
         if not isinstance(value, dict):
             continue
         cve = value.get("cveMetadata") or {}
@@ -80,26 +80,36 @@ def make_prompt(items, failures):
     return """Você é um analista defensivo e mentor técnico para um estudante de computação interessado em cibersegurança. Use somente os itens fornecidos; não invente fatos, datas, CVEs, impactos ou links. Selecione no máximo 7 sinais práticos para estudos, Linux, redes, cloud security, threat intelligence, vulnerabilidades, secure coding ou IA defensiva. Retorne somente JSON válido neste formato: {\"coverage_window\":\"...\",\"executive_summary\":\"...\",\"signals\":[{\"title\":\"...\",\"category\":\"...\",\"relevance\":\"alta|média\",\"confidence\":\"alta|média|baixa\",\"what_changed\":\"...\",\"why_it_matters\":\"...\",\"application\":\"...\",\"source_name\":\"...\",\"source_url\":\"https://...\",\"published_at\":\"...\"}],\"experiment\":{\"title\":\"...\",\"objective\":\"...\",\"prerequisites\":[\"...\"],\"steps\":[\"...\"],\"expected_evidence\":[\"...\"],\"stop_condition\":\"...\"},\"discarded\":\"...\",\"backlog\":[\"...\"]}. O experimento deve ser autorizado, defensivo e executável em 20–60 minutos em laboratório local, container, aplicação intencionalmente vulnerável ou dados sintéticos. Nunca recomende atacar sistemas reais. Falhas de coleta: """ + (", ".join(failures) or "nenhuma") + "\nItens coletados:\n" + json.dumps(items, ensure_ascii=False)[:45000]
 
 
-def ask_gemini(prompt):
-    key = os.environ.get("GEMINI_API_KEY", "").strip()
+
+def call_openrouter(prompt):
+    key = os.environ.get("OPENROUTER_API_KEY", "").strip()
     if not key:
-        raise RuntimeError("GEMINI_API_KEY ausente")
-    model = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite").strip()
-    body = json.dumps({"contents": [{"parts": [{"text": prompt}]}], "generationConfig": {"maxOutputTokens": 3500, "responseMimeType": "application/json"}}).encode()
-    endpoint = "https://generativelanguage.googleapis.com/v1beta/models/" + urllib.parse.quote(model, safe="") + ":generateContent"
-    request = urllib.request.Request(endpoint, data=body, headers={"x-goog-api-key": key, "Content-Type": "application/json"}, method="POST")
+        raise RuntimeError("OPENROUTER_API_KEY ausente")
+    model = os.environ.get("OPENROUTER_MODEL", "openrouter/free").strip()
+    body = json.dumps({"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": 3500}).encode()
+    request = urllib.request.Request(
+        "https://openrouter.ai/api/v1/chat/completions",
+        data=body,
+        headers={
+            "Authorization": f"Bearer {key}",
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://luisglauria.github.io/cybersecurity-second-brain/",
+            "X-Title": "Cybersecurity Second Brain",
+        },
+        method="POST",
+    )
     try:
         with urllib.request.urlopen(request, timeout=120) as response:
             payload = json.loads(response.read().decode())
     except urllib.error.HTTPError as exc:
-        raise RuntimeError(f"Gemini API HTTP {exc.code}") from exc
-    parts = (payload.get("candidates") or [{}])[0].get("content", {}).get("parts", [])
-    text = next((part.get("text", "") for part in parts if isinstance(part, dict)), "").strip()
-    text = re.sub(r"^\x60\x60\x60(?:json)?\s*|\s*\x60\x60\x60$", "", text, flags=re.I)
+        raise RuntimeError(f"OpenRouter API HTTP {exc.code}") from exc
+    choices = payload.get("choices", [])
+    message = choices[0].get("message", {}) if choices else {}
+    text = message.get("content", "") if isinstance(message, dict) else ""
+    text = re.sub(r"^\x60\x60\x60(?:json)?\s*|\s*\x60\x60\x60$", "", text.strip(), flags=re.I)
     if not text:
-        raise RuntimeError("Gemini não retornou texto")
+        raise RuntimeError("OpenRouter não retornou texto")
     return json.loads(text)
-
 
 def normalize(report, count, failures):
     signals = []
@@ -137,7 +147,7 @@ def main():
         items, failures = collect()
         if not items:
             raise RuntimeError("nenhuma fonte retornou itens")
-        report = normalize(ask_gemini(make_prompt(items, failures)), len(items), failures)
+        report = normalize(call_openrouter(make_prompt(items, failures)), len(items), failures)
         STATE.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     except Exception as exc:
         failure = f"{type(exc).__name__}: {str(exc)[:240]}"
