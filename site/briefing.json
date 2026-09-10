@@ -1,18 +1,99 @@
 {
-  "generated_at": "2026-09-10T00:00:00-03:00",
-  "coverage_window": "Aguardando a primeira execução cloud",
-  "executive_summary": "O workflow está pronto para coletar fontes, filtrar sinais e publicar o primeiro briefing.",
-  "signals": [],
+  "generated_at": "2026-09-10T01:38:15-03:00",
+  "coverage_window": "Triagem local após falha de formatação da IA",
+  "executive_summary": "A coleta foi concluída, mas a resposta do roteador gratuito não passou na validação JSON. Os sinais foram mantidos para revisão manual.",
+  "signals": [
+    {
+      "title": "Citrix NetScaler ADC and NetScaler Gateway contain an authentication-bypass vulnerability involving an alternate path or channel. When the NetScaler appliance is configured as an A",
+      "category": "triagem manual",
+      "relevance": "média",
+      "confidence": "baixa",
+      "what_changed": "Citrix NetScaler https://support.citrix.com/external/article/CTX696939/netscaler-adc-and-netscaler-gateway-secu.html ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-19490",
+      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
+      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-09-09"
+    },
+    {
+      "title": "Fortinet FortiOS, FortiSwitchManager, and FortiSASE contain a heap-based buffer overflow vulnerability that allows an attacker to execute unauthorized code or commands via speciall",
+      "category": "triagem manual",
+      "relevance": "média",
+      "confidence": "baixa",
+      "what_changed": "Fortinet Multiple Products https://fortiguard.fortinet.com/psirt/FG-IR-25-084 ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2025-25249",
+      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
+      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-09-09"
+    },
+    {
+      "title": "Google Chromium V8 contains an out of bounds write vulnerability that allows a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. This vulnerabil",
+      "category": "triagem manual",
+      "relevance": "média",
+      "confidence": "baixa",
+      "what_changed": "Google Chromium V8 https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-87491",
+      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
+      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-09-09"
+    },
+    {
+      "title": "Cisco Secure Firewall Management Center (FMC) Software and Cisco Security Cloud Control (SCC) Firewall Management contain an authentication Bypass using an alternate path or channe",
+      "category": "triagem manual",
+      "relevance": "média",
+      "confidence": "baixa",
+      "what_changed": "Cisco Secure Firewall Management Center (FMC) and Security Cloud Control (SCC) Firewall Management https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-onprem-fmc-authbypass-5JPp45V2 ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/",
+      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
+      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-09-09"
+    },
+    {
+      "title": "Adobe Commerce and Magento Open Source contain an improper neutralization of special elements used in a template engine vulnerability that could allow an attacker to execute arbitr",
+      "category": "triagem manual",
+      "relevance": "média",
+      "confidence": "baixa",
+      "what_changed": "Adobe Commerce and Magento https://helpx.adobe.com/security/products/magento/apsb26-146.html ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-75650",
+      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
+      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-09-08"
+    }
+  ],
   "experiment": {
-    "title": "Preparar o laboratório local",
-    "objective": "Definir um ambiente autorizado para os experimentos diários.",
-    "prerequisites": ["Docker ou uma VM local", "Um diretório separado para evidências"],
-    "steps": ["Criar um diretório de laboratório", "Registrar o escopo permitido", "Escolher uma aplicação intencionalmente vulnerável"],
-    "expected_evidence": ["Escopo documentado", "Ambiente isolado e reproduzível"],
-    "stop_condition": "Interromper se o teste sair do laboratório autorizado."
+    "title": "Validar uma fonte em laboratório",
+    "objective": "Ler uma fonte coletada e registrar o impacto defensivo sem interagir com sistemas reais.",
+    "prerequisites": [
+      "Fonte original acessível",
+      "Ambiente de anotações",
+      "Escopo autorizado"
+    ],
+    "steps": [
+      "Escolher um sinal",
+      "Confirmar a informação na fonte original",
+      "Registrar impacto, mitigação e dúvida restante"
+    ],
+    "expected_evidence": [
+      "Nota técnica com fonte",
+      "Escopo de validação documentado"
+    ],
+    "stop_condition": "Parar se a atividade exigir acesso a um ativo não autorizado."
   },
-  "discarded": "Nenhum briefing executado ainda.",
-  "backlog": ["Configurar OPENROUTER_API_KEY no GitHub", "Ativar GitHub Pages", "Executar o workflow manualmente"],
-  "collection": {"items": 0, "failures": []},
-  "status": "empty"
+  "discarded": "Síntese automática indisponível; nenhum fato adicional foi inventado.",
+  "backlog": [
+    "Revisar os sinais manualmente",
+    "Executar novamente no próximo ciclo",
+    "Manter o escopo defensivo"
+  ],
+  "collection": {
+    "items": 40,
+    "failures": []
+  },
+  "status": "ok",
+  "last_failure_at": "2026-09-10T01:38:15-03:00",
+  "last_failure": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
 }
