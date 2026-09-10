@@ -12,7 +12,7 @@
     "stop_condition": "Interromper se o teste sair do laboratório autorizado."
   },
   "discarded": "Nenhum briefing executado ainda.",
-  "backlog": ["Configurar GEMINI_API_KEY no GitHub", "Ativar GitHub Pages", "Executar o workflow manualmente"],
+  "backlog": ["Configurar OPENROUTER_API_KEY no GitHub", "Ativar GitHub Pages", "Executar o workflow manualmente"],
   "collection": {"items": 0, "failures": []},
   "status": "empty"
 }
