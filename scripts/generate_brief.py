@@ -117,7 +117,7 @@ def fetch_sources() -> tuple[list[dict], list[str]]:
 
 
 def build_prompt(items: list[dict], failures: list[str]) -> str:
-    context = json.dumps(items, ensure_ascii=False, indent=2)[:45_000]
+    context = json.dumps(items[:20], ensure_ascii=False, indent=2)[:30_000]
     failure_note = ", ".join(failures) if failures else "nenhuma"
     return f"""Você é um analista defensivo e mentor técnico para um estudante de ciência da computação que quer construir carreira e portfólio em cibersegurança.
 
@@ -144,6 +144,8 @@ Itens coletados:
 def parse_json_response(text: str) -> dict:
     text = text.strip()
     text = re.sub(r"^\x60\x60\x60(?:json)?\s*|\s*\x60\x60\x60$", "", text, flags=re.IGNORECASE)
+    if not text:
+        raise ValueError("OpenRouter retornou conteúdo vazio")
     candidates = [text]
     start = text.find("{")
     end = text.rfind("}")
