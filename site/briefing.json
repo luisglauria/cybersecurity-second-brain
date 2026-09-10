@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T01:38:15-03:00",
+  "generated_at": "2026-09-10T11:48:00-03:00",
   "coverage_window": "Triagem local após falha de formatação da IA",
   "executive_summary": "A coleta foi concluída, mas a resposta do roteador gratuito não passou na validação JSON. Os sinais foram mantidos para revisão manual.",
   "signals": [
@@ -90,10 +90,12 @@
     "Manter o escopo defensivo"
   ],
   "collection": {
-    "items": 40,
-    "failures": []
+    "items": 30,
+    "failures": [
+      "OWASP: HTTPError"
+    ]
   },
   "status": "ok",
-  "last_failure_at": "2026-09-10T01:38:15-03:00",
+  "last_failure_at": "2026-09-10T11:48:00-03:00",
   "last_failure": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
 }
