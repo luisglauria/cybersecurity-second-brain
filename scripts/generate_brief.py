@@ -86,7 +86,7 @@ def call_openrouter(prompt):
     if not key:
         raise RuntimeError("OPENROUTER_API_KEY ausente")
     model = os.environ.get("OPENROUTER_MODEL", "openrouter/free").strip()
-    body = json.dumps({"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": 3500}).encode()
+    body = json.dumps({"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": 4500, "temperature": 0.1, "response_format": {"type": "json_object"}}).encode()
     request = urllib.request.Request(
         "https://openrouter.ai/api/v1/chat/completions",
         data=body,
@@ -109,7 +109,27 @@ def call_openrouter(prompt):
     text = re.sub(r"^\x60\x60\x60(?:json)?\s*|\s*\x60\x60\x60$", "", text.strip(), flags=re.I)
     if not text:
         raise RuntimeError("OpenRouter não retornou texto")
-    return json.loads(text)
+    return parse_json_response(text)
+def parse_json_response(text):
+    text = text.strip()
+    text = re.sub(r"^\x60\x60\x60(?:json)?\s*|\s*\x60\x60\x60$", "", text, flags=re.I)
+    candidates = [text]
+    start, end = text.find("{"), text.rfind("}")
+    if start >= 0 and end > start:
+        candidates.append(text[start:end + 1])
+    last_error = None
+    for candidate in candidates:
+        try:
+            parsed = json.loads(candidate)
+        except json.JSONDecodeError as exc:
+            last_error = exc
+            continue
+        if isinstance(parsed, dict):
+            return parsed
+    if last_error:
+        raise last_error
+    raise ValueError("OpenRouter não retornou um objeto JSON")
+
 
 def normalize(report, count, failures):
     signals = []
@@ -138,11 +158,18 @@ def render(report, failure=""):
     experiment = report.get("experiment", {})
     return f"<!doctype html><html lang='pt-BR'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Briefing diário de cibersegurança</title><style>body{{margin:0;background:#0b1020;color:#e8eefc;font:16px/1.6 system-ui,sans-serif}}main{{max-width:1100px;margin:auto;padding:32px 16px}}.card{{background:#121a2d;border:1px solid #2b3a5e;border-radius:14px;padding:18px;margin:14px 0}}.signals{{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}}small{{color:#a8b4ce}}a{{color:#74c0fc}}.alert{{border-left:4px solid #ffd166;background:#3c3014;padding:12px}}</style></head><body><main><p><b>CYBERSECURITY SECOND BRAIN</b></p><h1>Briefing diário de cibersegurança</h1><p>Gerado em {esc(report.get('generated_at'))}</p>{warning}<section class='card'><h2>Síntese executiva</h2><p>{esc(report.get('executive_summary')) or 'Nenhuma síntese disponível.'}</p><small>Janela: {esc(report.get('coverage_window'))} · Itens coletados: {esc(report.get('collection', {}).get('items'))}</small></section><h2>Sinais selecionados</h2><div class='signals'>{''.join(cards) or '<article class="card">Nenhum sinal passou pelo filtro.</article>'}</div><section class='card'><h2>Experimento recomendado</h2><h3>{esc(experiment.get('title'))}</h3><p>{esc(experiment.get('objective'))}</p><h3>Pré-requisitos</h3>{list_html(experiment.get('prerequisites', []))}<h3>Passos</h3>{list_html(experiment.get('steps', []), 'ol')}<h3>Evidências esperadas</h3>{list_html(experiment.get('expected_evidence', []))}<p><b>Condição de parada:</b> {esc(experiment.get('stop_condition'))}</p></section><section class='card'><h2>Triagem</h2><p>{esc(report.get('discarded'))}</p><h3>Backlog</h3>{list_html(report.get('backlog', []))}</section><footer>Uso educacional e defensivo. Teste somente em ativos autorizados, laboratórios locais ou dados sintéticos.</footer></main></body></html>"
 
+def local_fallback_report(items):
+    signals = []
+    for item in items[:5]:
+        signals.append({"title": item.get("title", "Sinal coletado"), "category": "triagem manual", "relevance": "média", "confidence": "baixa", "what_changed": item.get("summary", "Revisar a atualização na fonte original."), "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.", "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.", "source_name": item.get("source", "Fonte allowlist"), "source_url": item.get("url", ""), "published_at": item.get("published_at", "")})
+    return {"coverage_window": "Triagem local após falha de formatação da IA", "executive_summary": "A coleta foi concluída, mas a resposta do roteador gratuito não passou na validação JSON. Os sinais foram mantidos para revisão manual.", "signals": signals, "experiment": {"title": "Validar uma fonte em laboratório", "objective": "Ler uma fonte coletada e registrar o impacto defensivo sem interagir com sistemas reais.", "prerequisites": ["Fonte original acessível", "Ambiente de anotações", "Escopo autorizado"], "steps": ["Escolher um sinal", "Confirmar a informação na fonte original", "Registrar impacto, mitigação e dúvida restante"], "expected_evidence": ["Nota técnica com fonte", "Escopo de validação documentado"], "stop_condition": "Parar se a atividade exigir acesso a um ativo não autorizado."}, "discarded": "Síntese automática indisponível; nenhum fato adicional foi inventado.", "backlog": ["Revisar os sinais manualmente", "Executar novamente no próximo ciclo", "Manter o escopo defensivo"]}
+
 
 def main():
     SITE.mkdir(parents=True, exist_ok=True)
     previous = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {"generated_at": "", "coverage_window": "", "executive_summary": "Ainda não há briefing válido.", "signals": [], "experiment": {}, "discarded": "", "backlog": [], "collection": {"items": 0, "failures": []}, "status": "empty"}
     failure = ""
+    items, failures = [], []
     try:
         items, failures = collect()
         if not items:
@@ -151,9 +178,15 @@ def main():
         STATE.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     except Exception as exc:
         failure = f"{type(exc).__name__}: {str(exc)[:240]}"
-        report = previous
-        report["last_failure"] = failure
-        report["last_failure_at"] = dt.datetime.now(TZ).replace(microsecond=0).isoformat()
+        if items:
+            report = normalize(local_fallback_report(items), len(items), failures)
+            report["last_failure"] = failure
+            report["last_failure_at"] = dt.datetime.now(TZ).replace(microsecond=0).isoformat()
+            STATE.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        else:
+            report = previous
+            report["last_failure"] = failure
+            report["last_failure_at"] = dt.datetime.now(TZ).replace(microsecond=0).isoformat()
         print(f"::warning::{failure}")
     INDEX.write_text(render(report, failure), encoding="utf-8")
     print(f"Generated {INDEX} with status={report.get('status', 'unknown')}")
