@@ -1,0 +1,20 @@
+[
+  {
+    "name": "CISA Known Exploited Vulnerabilities",
+    "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+    "format": "json",
+    "max_items": 15
+  },
+  {
+    "name": "GitHub Security Advisories",
+    "url": "https://api.github.com/advisories?per_page=20",
+    "format": "json",
+    "max_items": 15
+  },
+  {
+    "name": "OWASP",
+    "url": "https://owasp.org/feed.xml",
+    "format": "xml",
+    "max_items": 10
+  }
+]
