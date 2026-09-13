@@ -1,93 +1,97 @@
 {
-  "generated_at": "2026-09-12T10:51:38-03:00",
-  "coverage_window": "Triagem local após falha de formatação da IA",
-  "executive_summary": "A coleta foi concluída, mas a resposta do roteador gratuito não passou na validação JSON. Os sinais foram mantidos para revisão manual.",
+  "generated_at": "2026-09-13T11:48:08-03:00",
+  "coverage_window": "2026-09-04 to 2026-09-11",
+  "executive_summary": "Cinco vulnerabilidades críticas recentes em sistemas de autenticação, acesso remoto e infraestrutura de rede, com aplicação direta em estudos de segurança de redes, cloud e secure coding. Destacam-se falhas em autorização, execução de código remoto e escalonamento de privilégios.",
   "signals": [
     {
-      "title": "ConnectWise ScreenConnect contains both an improper privilege management and missing authorization vulnerability that may allow an attacker to file transfer and execution through a",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "ConnectWise ScreenConnect https://www.connectwise.com/company/trust/security-bulletins/2026-09-08-screenconnect-bulletin ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-84869",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "title": "GitLab CE/EE Path Traversal via Commits API",
+      "category": "Vulnerabilidades",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Falta de confinamento de caminho e autenticação em API de commits permite leitura de arquivos arbitrários",
+      "why_it_matters": "Exposição de dados sensíveis em repositórios e sistemas de versionamento",
+      "application": "Estudo de validação de entrada em APIs REST e testes de path traversal em ambientes de DevOps",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-09-11"
     },
     {
-      "title": "JFrog Artifactory contains an incorrect authorization vulnerability that allows leads to privilege escalation attack due to a validation check of the token signature/issuer and not",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "JFrog Artifactory https://docs.jfrog.com/releases/docs/jfrog-security-advisories ; https://docs.jfrog.com/releases/docs/artifactory-self-managed-releases ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-42016",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "title": "JFrog Artifactory Token Scope Validation Bypass",
+      "category": "Cloud Security",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Validação incorreta de escopo em tokens permite escalonamento de privilégios",
+      "why_it_matters": "Risco de acesso não autorizado a artefatos críticos em pipelines CI/CD",
+      "application": "Análise de fluxos de autenticação em ferramentas de artefatos e testes de token manipulation",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-09-11"
     },
     {
-      "title": "JFrog Artifactory contains an improper authentication vulnerability that could return an internal anonymous-user token to an unauthenticated caller when anonymous access is disable",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "JFrog Artifactory https://docs.jfrog.com/releases/docs/jfrog-security-advisories ; https://docs.jfrog.com/releases/docs/artifactory-self-managed-releases ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-42018",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "title": "Cisco FMC Authentication Bypass via Alternate Channel",
+      "category": "Network Security",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Vulnerabilidade em caminho alternativo permite contorno de autenticação e execução de scripts",
+      "why_it_matters": "Acesso root em dispositivos de firewall críticos sem credenciais válidas",
+      "application": "Simulação de testes de autenticação em appliances de segurança e análise de vetores de ataque não convencionais",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-09-11"
+      "published_at": "2026-09-09"
     },
     {
-      "title": "GitLab Community Edition and Enterprise Edition contains a path traversal vulnerability that allows an unauthenticated user to read arbitrary files due to an improper path confinem",
-      "category": "triagem manual",
+      "title": "Google Chromium V8 Type Confusion RCE",
+      "category": "Vulnerabilidades",
       "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "GitLab Community Edition and Enterprise Edition https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-3-2-released/ ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-85706",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "confidence": "alta",
+      "what_changed": "Confusão de tipos em interpretador permite execução de código fora do sandbox",
+      "why_it_matters": "Exposição de múltiplos navegadores baseados em Chromium a ataques remotos",
+      "application": "Estudo de mitigadores de sandbox e análise de exploits em motores de renderização",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-09-11"
+      "published_at": "2026-09-09"
     },
     {
-      "title": "MikroTik RouterOS contains an improper neutralization of argument delimiters in a command vulnerability which allows an attacked to change the trusted RouterOS policy mask, leading",
-      "category": "triagem manual",
+      "title": "MikroTik RouterOS Privilege Escalation via Policy Mask",
+      "category": "Network Security",
       "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "MikroTik RouterOS ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-86060",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "confidence": "alta",
+      "what_changed": "Injeção de argumentos em comando altera máscara de política confiável",
+      "why_it_matters": "Escalonamento de privilégios em dispositivos de rede críticos",
+      "application": "Testes de validação de entrada em CLI de roteadores e análise de permissões de sistema operacional",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-09-10"
     }
   ],
   "experiment": {
-    "title": "Validar uma fonte em laboratório",
-    "objective": "Ler uma fonte coletada e registrar o impacto defensivo sem interagir com sistemas reais.",
+    "title": "Detecção e Correção de Path Traversal em API de Repositórios",
+    "objective": "Identificar e mitigar vulnerabilidade de path traversal em endpoint de API de commits de repositório",
     "prerequisites": [
-      "Fonte original acessível",
-      "Ambiente de anotações",
-      "Escopo autorizado"
+      "Docker instalado",
+      "Conhecimento básico de Python/REST",
+      "Acesso a GitLab Community Edition"
     ],
     "steps": [
-      "Escolher um sinal",
-      "Confirmar a informação na fonte original",
-      "Registrar impacto, mitigação e dúvida restante"
+      "1. Executar GitLab CE em container Docker com configuração padrão",
+      "2. Criar repositório de teste e arquivo sensível fora do diretório esperado",
+      "3. Enviar requisição GET para /api/v4/projects/:id/repository/commits?path=../../../etc/passwd",
+      "4. Verificar se o sistema retorna conteúdo do arquivo alvo",
+      "5. Implementar validação de caminho absoluto e restringir acesso a diretórios permitidos",
+      "6. Reexecutar teste e confirmar bloqueio da tentativa"
     ],
     "expected_evidence": [
-      "Nota técnica com fonte",
-      "Escopo de validação documentado"
+      "Log de requisição bloqueada",
+      "Código patch com validação de caminho",
+      "Relatório de teste com resultados positivos"
     ],
-    "stop_condition": "Parar se a atividade exigir acesso a um ativo não autorizado."
+    "stop_condition": "Vulnerabilidade corrigida e testes automatizados confirmam proteção"
   },
-  "discarded": "Síntese automática indisponível; nenhum fato adicional foi inventado.",
+  "discarded": "Itens de GitHub Security Advisories descartados devido a falta de contexto prático imediato para laboratório local; vulnerabilidades MikroTik adicionais e Microsoft Windows mantidas no backlog por relevância secundária",
   "backlog": [
-    "Revisar os sinais manualmente",
-    "Executar novamente no próximo ciclo",
-    "Manter o escopo defensivo"
+    "Citrix NetScaler Auth Bypass",
+    "Adobe Commerce Template Injection",
+    "Microsoft Windows Update Stack Privilege Escalation"
   ],
   "collection": {
     "items": 30,
@@ -95,7 +99,5 @@
       "OWASP: HTTPError"
     ]
   },
-  "status": "ok",
-  "last_failure_at": "2026-09-12T10:51:38-03:00",
-  "last_failure": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+  "status": "ok"
 }
