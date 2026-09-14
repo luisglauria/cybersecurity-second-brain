@@ -1,97 +1,94 @@
 {
-  "generated_at": "2026-09-13T11:48:08-03:00",
-  "coverage_window": "2026-09-04 to 2026-09-11",
-  "executive_summary": "Cinco vulnerabilidades críticas recentes em sistemas de autenticação, acesso remoto e infraestrutura de rede, com aplicação direta em estudos de segurança de redes, cloud e secure coding. Destacam-se falhas em autorização, execução de código remoto e escalonamento de privilégios.",
+  "generated_at": "2026-09-14T13:48:18-03:00",
+  "coverage_window": "2026-09-08 to 2026-09-14",
+  "executive_summary": "Recent CISA KEV and GitHub advisories expose critical flaws in GitLab, JFrog Artifactory, MikroTik, Chromium, and N‑able, providing practical material for defensive security study and portfolio projects.",
   "signals": [
     {
-      "title": "GitLab CE/EE Path Traversal via Commits API",
-      "category": "Vulnerabilidades",
+      "title": "GitLab repository commits API path traversal",
+      "category": "vulnerability",
       "relevance": "alta",
       "confidence": "alta",
-      "what_changed": "Falta de confinamento de caminho e autenticação em API de commits permite leitura de arquivos arbitrários",
-      "why_it_matters": "Exposição de dados sensíveis em repositórios e sistemas de versionamento",
-      "application": "Estudo de validação de entrada em APIs REST e testes de path traversal em ambientes de DevOps",
+      "what_changed": "CVE-2026-85706 published indicating unauthenticated path traversal in commits API",
+      "why_it_matters": "Allows reading arbitrary repository files without authentication, threatening source code confidentiality",
+      "application": "Deploy GitLab CE, craft request with '..' in path, verify unauthorized file read, then implement path sanitization",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-09-11"
     },
     {
-      "title": "JFrog Artifactory Token Scope Validation Bypass",
-      "category": "Cloud Security",
+      "title": "JFrog Artifactory token scope validation flaw",
+      "category": "authentication",
       "relevance": "alta",
       "confidence": "alta",
-      "what_changed": "Validação incorreta de escopo em tokens permite escalonamento de privilégios",
-      "why_it_matters": "Risco de acesso não autorizado a artefatos críticos em pipelines CI/CD",
-      "application": "Análise de fluxos de autenticação em ferramentas de artefatos e testes de token manipulation",
+      "what_changed": "CVE-2026-42016 published showing token validation ignores scope",
+      "why_it_matters": "Enables privilege escalation in CI/CD pipelines by bypassing scope checks",
+      "application": "Run local Artifactory, test token without scope, demonstrate escalation, then enforce scope validation",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-09-11"
     },
     {
-      "title": "Cisco FMC Authentication Bypass via Alternate Channel",
-      "category": "Network Security",
+      "title": "MikroTik RouterOS argument delimiter neutralization",
+      "category": "network",
       "relevance": "alta",
       "confidence": "alta",
-      "what_changed": "Vulnerabilidade em caminho alternativo permite contorno de autenticação e execução de scripts",
-      "why_it_matters": "Acesso root em dispositivos de firewall críticos sem credenciais válidas",
-      "application": "Simulação de testes de autenticação em appliances de segurança e análise de vetores de ataque não convencionais",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-09-09"
-    },
-    {
-      "title": "Google Chromium V8 Type Confusion RCE",
-      "category": "Vulnerabilidades",
-      "relevance": "média",
-      "confidence": "alta",
-      "what_changed": "Confusão de tipos em interpretador permite execução de código fora do sandbox",
-      "why_it_matters": "Exposição de múltiplos navegadores baseados em Chromium a ataques remotos",
-      "application": "Estudo de mitigadores de sandbox e análise de exploits em motores de renderização",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-09-09"
-    },
-    {
-      "title": "MikroTik RouterOS Privilege Escalation via Policy Mask",
-      "category": "Network Security",
-      "relevance": "média",
-      "confidence": "alta",
-      "what_changed": "Injeção de argumentos em comando altera máscara de política confiável",
-      "why_it_matters": "Escalonamento de privilégios em dispositivos de rede críticos",
-      "application": "Testes de validação de entrada em CLI de roteadores e análise de permissões de sistema operacional",
+      "what_changed": "CVE-2026-86060 published revealing improper argument delimiter handling",
+      "why_it_matters": "Allows attacker to change router policy mask and gain privilege escalation",
+      "application": "Use MikroTik virtual lab, inject delimiter in command, observe policy change, then apply input sanitization",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-09-10"
+    },
+    {
+      "title": "Chromium V8 out-of-bounds write",
+      "category": "web",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "CVE-2026-87491 published for out-of-bounds write in V8 engine",
+      "why_it_matters": "Enables remote code execution via crafted HTML, affecting many browsers",
+      "application": "Create malicious HTML page, test code execution in Chromium, then add input validation and sandbox checks",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-09-09"
+    },
+    {
+      "title": "N-able N-central static code injection",
+      "category": "cloud",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "CVE-2026-86218 published indicating pre‑auth remote code execution",
+      "why_it_matters": "Allows attacker to execute code before authentication in SaaS management platform",
+      "application": "Run N-central container, attempt exploit via crafted request, then implement input filtering and auth checks",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-09-08"
     }
   ],
   "experiment": {
-    "title": "Detecção e Correção de Path Traversal em API de Repositórios",
-    "objective": "Identificar e mitigar vulnerabilidade de path traversal em endpoint de API de commits de repositório",
+    "title": "Reproduce GitLab Path Traversal CVE-2026-85706",
+    "objective": "Show that unauthenticated requests can read arbitrary repository files via the commits API",
     "prerequisites": [
-      "Docker instalado",
-      "Conhecimento básico de Python/REST",
-      "Acesso a GitLab Community Edition"
+      "GitLab CE Docker image",
+      "curl",
+      "network access"
     ],
     "steps": [
-      "1. Executar GitLab CE em container Docker com configuração padrão",
-      "2. Criar repositório de teste e arquivo sensível fora do diretório esperado",
-      "3. Enviar requisição GET para /api/v4/projects/:id/repository/commits?path=../../../etc/passwd",
-      "4. Verificar se o sistema retorna conteúdo do arquivo alvo",
-      "5. Implementar validação de caminho absoluto e restringir acesso a diretórios permitidos",
-      "6. Reexecutar teste e confirmar bloqueio da tentativa"
+      "Start GitLab CE container exposing port 8080",
+      "Create a test project with a file path containing '..' characters",
+      "Send GET request to /api/v4/projects/:id/repository/commits with malicious path parameter",
+      "Observe response containing file contents without authentication"
     ],
     "expected_evidence": [
-      "Log de requisição bloqueada",
-      "Código patch com validação de caminho",
-      "Relatório de teste com resultados positivos"
+      "HTTP 200 response with file listing",
+      "File content exposed without authentication"
     ],
-    "stop_condition": "Vulnerabilidade corrigida e testes automatizados confirmam proteção"
+    "stop_condition": "When file content is successfully retrieved without authentication"
   },
-  "discarded": "Itens de GitHub Security Advisories descartados devido a falta de contexto prático imediato para laboratório local; vulnerabilidades MikroTik adicionais e Microsoft Windows mantidas no backlog por relevância secundária",
+  "discarded": "All CISA KEV entries beyond the five selected signals",
   "backlog": [
-    "Citrix NetScaler Auth Bypass",
-    "Adobe Commerce Template Injection",
-    "Microsoft Windows Update Stack Privilege Escalation"
+    "ConnectWise ScreenConnect",
+    "Citrix NetScaler",
+    "Fortinet"
   ],
   "collection": {
     "items": 30,
