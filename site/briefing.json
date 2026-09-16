@@ -1,96 +1,98 @@
 {
-  "generated_at": "2026-09-15T12:27:22-03:00",
-  "coverage_window": "2026-09-08 a 2026-09-14",
-  "executive_summary": "Cinco vulnerabilidades críticas e de alta severidade foram identificadas em sistemas de segurança, autenticação e gerenciamento de identidade, com foco em injeção, bypass de autorização e escalada de privilégios. Recomenda-se priorizar atualizações e validações de escopo em tokens OAuth2.",
+  "generated_at": "2026-09-16T12:21:13-03:00",
+  "coverage_window": "2026-09-14 to 2026-09-18",
+  "executive_summary": "Recent KEV‑listed vulnerabilities affect common dev‑ops and client‑side components, offering practical lab opportunities for secure coding, patch validation, and detection.",
   "signals": [
     {
-      "title": "Cisco Secure Email Gateway SQL Injection (CVE-2026-76461)",
-      "category": "Vulnerabilidades",
+      "title": "GitLab Path Traversal Vulnerability (CVE-2026-85706)",
+      "category": "Vulnerability",
       "relevance": "alta",
       "confidence": "alta",
-      "what_changed": "Adição de CVE crítica em software de segurança corporativa.",
-      "why_it_matters": "Permite execução remota de código com privilégios root sem autenticação.",
-      "application": "Estudo de injeção SQL em APIs REST e implementação de validação de entrada em aplicações web.",
+      "what_changed": "Added to CISA KEV list on 2026-09-11",
+      "why_it_matters": "Unauthenticated users can read arbitrary files via improper path confinement",
+      "application": "Deploy GitLab CE Docker, craft request with ?path=../etc/passwd to read /etc/passwd, then implement path sanitization",
       "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-76461",
-      "published_at": "2026-09-14"
-    },
-    {
-      "title": "ConnectWise ScreenConnect Authorization Bypass (CVE-2026-84869)",
-      "category": "Threat Intelligence",
-      "relevance": "alta",
-      "confidence": "alta",
-      "what_changed": "Vulnerabilidade de gerenciamento de privilégios em software de acesso remoto.",
-      "why_it_matters": "Permite transferência de arquivos e execução sem autorização em sessões ativas.",
-      "application": "Análise de controle de acesso em sistemas de administração remota e testes de autorização.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-84869",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-09-11"
     },
     {
-      "title": "JFrog Artifactory Token Scope Validation Flaw (CVE-2026-42016)",
-      "category": "Cloud Security",
+      "title": "JFrog Artifactory Token Scope Validation Bypass (CVE-2026-42016)",
+      "category": "Authorization",
       "relevance": "alta",
       "confidence": "alta",
-      "what_changed": "Falha em validação de escopo de tokens OAuth2 em plataforma de artefatos.",
-      "why_it_matters": "Permite escalada de privilégios via tokens mal validados.",
-      "application": "Implementação de validação rigorosa de escopo em tokens OAuth2 para APIs.",
+      "what_changed": "Added to CISA KEV list on 2026-09-11",
+      "why_it_matters": "Token scope not validated allows privilege escalation in CI/CD pipelines",
+      "application": "Run Artifactory Docker, send request with token lacking required scope, demonstrate unauthorized repository access, then fix scope validation",
       "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42016",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-09-11"
     },
     {
-      "title": "GitLab Path Traversal in Repository API (CVE-2026-85706)",
-      "category": "Secure Coding",
+      "title": "mcp-gitlab Unauthenticated File Read Leading to PAT Exfiltration (GHSA-cv3r-c5h8-f4g5)",
+      "category": "Vulnerability",
       "relevance": "alta",
       "confidence": "alta",
-      "what_changed": "Vulnerabilidade de leitura de arquivos arbitrários via API de commits.",
-      "why_it_matters": "Exposição de dados sensíveis sem autenticação.",
-      "application": "Testes de sanitização de caminhos em APIs REST e uso de bibliotecas seguras para manipulação de arquivos.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-85706",
-      "published_at": "2026-09-11"
-    },
-    {
-      "title": "ZITADEL OAuth2 Token Exchange Privilege Escalation (GHSA-vrh8-c9cm-wh8v)",
-      "category": "Secure Coding",
-      "relevance": "alta",
-      "confidence": "alta",
-      "what_changed": "Falha em revogação de papéis durante troca de tokens OAuth2.",
-      "why_it_matters": "Permite escalada de privilégios via tokens mal validados.",
-      "application": "Auditoria de fluxos OAuth2 e validação de escopo em sistemas de identidade.",
+      "what_changed": "GitHub Security Advisory published 2026-09-16",
+      "why_it_matters": "Allows unauthenticated read of files, enabling personal access token theft and full account takeover",
+      "application": "Create Node.js app using @zereight/mcp-gitlab, trigger upload_markdown endpoint, capture PAT, then enforce authentication and input validation",
       "source_name": "GitHub Security Advisories",
-      "source_url": "https://github.com/advisories/GHSA-vrh8-c9cm-wh8v",
-      "published_at": "2026-09-14T21:28:23Z"
+      "source_url": "https://github.com/advisories/GHSA-cv3r-c5h8-f4g5",
+      "published_at": "2026-09-16T13:48:28Z"
+    },
+    {
+      "title": "Microsoft Windows Update Stack Local Privilege Escalation (CVE-2026-81963)",
+      "category": "Privilege Escalation",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Added to CISA KEV list on 2026-09-08",
+      "why_it_matters": "Local attacker can escalate to SYSTEM, important for Windows hardening",
+      "application": "Use Windows VM, verify unpatched state, apply Microsoft security update, then test mitigation via patch management",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-09-08"
+    },
+    {
+      "title": "Google Chromium V8 Out‑of‑Bounds Write (CVE-2026-87491)",
+      "category": "Memory Corruption",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Added to CISA KEV list on 2026-09-09",
+      "why_it_matters": "Remote attacker can execute arbitrary code via crafted HTML, affecting browsers",
+      "application": "Run Chromium in Docker, serve malicious HTML page, observe sandbox escape, then implement CSP and proper bounds checking",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-09-09"
     }
   ],
   "experiment": {
-    "title": "Simulação de Path Traversal em API Local",
-    "objective": "Detectar e mitigar uma vulnerabilidade de path traversal em uma API REST local.",
+    "title": "Lab: Exploit and Mitigate GitLab Path Traversal (CVE-2026-85706)",
+    "objective": "Demonstrate unauthenticated file read via path traversal in GitLab CE and implement input sanitization",
     "prerequisites": [
-      "Docker",
-      "Python 3.9+",
-      "Burp Suite Community ou curl",
-      "Acesso a um repositório de código local"
+      "Docker installed",
+      "Internet access",
+      "GitLab CE Docker image (latest)",
+      "Basic Linux command line knowledge"
     ],
     "steps": [
-      "Criar uma API Flask com endpoint /arquivo que lê arquivos via parâmetro 'caminho'.",
-      "Injetar payloads como ../../../../etc/passwd para testar path traversal.",
-      "Usar Burp Suite para interceptar e modificar requisições.",
-      "Implementar sanitização de caminhos com os.path.basename e validação de diretório.",
-      "Repetir testes para confirmar mitigação."
+      "Pull and run GitLab CE container exposing port 80",
+      "Access GitLab endpoint for repository uploads (e.g., /gitlab/api/v4/projects/1/repository/uploads)",
+      "Send crafted request with ?path=../etc/passwd using curl",
+      "Observe response containing /etc/passwd content",
+      "Modify application or proxy to sanitize the path parameter",
+      "Re‑send request and verify no file content is returned"
     ],
     "expected_evidence": [
-      "Logs mostrando acesso a arquivos fora do diretório esperado antes da mitigação.",
-      "Código atualizado com validação de caminho e testes automatizados."
+      "HTTP response with /etc/passwd file content when path traversal is used",
+      "No file content when sanitized path is used",
+      "Documentation of successful exploit and mitigation"
     ],
-    "stop_condition": "A API rejeita payloads de path traversal e retorna apenas arquivos dentro do diretório permitido."
+    "stop_condition": "When successful exploit and mitigation are demonstrated within 45 minutes"
   },
-  "discarded": "Vulnerabilidades em dispositivos de rede (MikroTik, Fortinet) e sistemas operacionais (Windows) foram descartadas por exigirem ambientes específicos. Avisos de baixa severidade (October CMS) e hype em correções de navegadores (Chromium V8) foram ignorados.",
+  "discarded": "Older KEV items beyond the 5‑day window",
   "backlog": [
-    "CVE-2026-86060 (MikroTik RouterOS)",
-    "CVE-2026-19490 (Citrix NetScaler)",
-    "CVE-2025-25249 (Fortinet)"
+    "Investigate MikroTik RouterOS CVE-2026-86060",
+    "Evaluate Fortinet heap overflow CVE-2025-25249",
+    "Study Adobe Commerce template injection CVE-2026-75650"
   ],
   "collection": {
     "items": 30,
