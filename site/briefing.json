@@ -1,93 +1,99 @@
 {
-  "generated_at": "2026-09-19T11:10:22-03:00",
-  "coverage_window": "Triagem local após falha de formatação da IA",
-  "executive_summary": "A coleta foi concluída, mas a resposta do roteador gratuito não passou na validação JSON. Os sinais foram mantidos para revisão manual.",
+  "generated_at": "2026-09-20T11:28:20-03:00",
+  "coverage_window": "2026-09-09 to 2026-09-18",
+  "executive_summary": "Five high-signal vulnerabilities were selected from CISA KEV and GitHub Security Advisories spanning Linux kernel security, cloud supply chain, web application secure coding, AI/MCP threat surface, and enterprise identity systems. These items offer direct practical value for portfolio projects, defensive labs, and threat intelligence studies.",
   "signals": [
     {
-      "title": "Linux Kernel contains a race condition vulnerability which allows concurrent writes to the same AF_ALG socket causing data to be unpredictably interleaved and creating inconsistenc",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Linux Kernel This vulnerability affects an open-source component, third-party library, protocol, or proprietary implementation that could be used by different products. For more information, please see: ; https://git.kernel.org/stable/c/0f28c4adbc4a97437874c9b669fd7958a8c6d6ce; https://git.kernel.org/stable/c/e4c1ec11132ec466f7362a95f36a506ce4dc08c9; https://git.kernel.org/stable/c/1f323a48e9b5ebfe6dc7d130fdf5c3c0e92a07c8; https://git.kernel.org/stable/c/7c4491b5644e3a3708f3dbd7591be0a570135b84;",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "title": "Linux Kernel TLS receive path improper check for exceptional conditions",
+      "category": "Linux / Kernel Security",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "A zero-length TLS record retrieved from rx_list bypasses recvmsg() record-type handling, causing subsequent records to be processed under incorrect zero-copy and queuing assumptions.",
+      "why_it_matters": "Kernel-level TLS processing flaws affect encrypted traffic integrity and can be leveraged for data corruption or privilege escalation in networked systems.",
+      "application": "Study kernel TLS stack behavior, analyze zero-copy networking assumptions, and build forensic triage scenarios for encrypted traffic anomalies in a lab environment.",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-09-18"
     },
     {
-      "title": "Linux Kernel contains an out-of-bounds write vulnerability in the ebtables SNAT target which allows an ARP sender hardware address rewrite to write directly into a nonlinear socket",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Linux Kernel This vulnerability affects an open-source component, third-party library, protocol, or proprietary implementation that could be used by different products. For more information, please see: ; https://git.kernel.org/stable/c/bf84ad7c7a9ede46e31afaa41a1ba06a159e8c87; https://git.kernel.org/stable/c/76280b78cc9f23bdc6438e10ad6dff148ef8375b; https://git.kernel.org/stable/c/b7e91939ba9be805a62a257fa4e227dffbb88fa0; https://git.kernel.org/stable/c/afd64b59c3de9bbbdd3759e834fdc55cda716e0b;",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "title": "JFrog Artifactory incorrect authorization via token signature/issuer validation without scope check",
+      "category": "Cloud Security / Supply Chain",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Token signature and issuer are validated but token scope is not, enabling privilege escalation attacks.",
+      "why_it_matters": "Supply chain platforms like Artifactory are high-value targets; scope validation gaps allow lateral movement and unauthorized artifact access.",
+      "application": "Build a mock artifact repository lab to demonstrate token scope validation failures, implement proper scope checks, and create a portfolio project on supply chain security.",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-09-18"
+      "published_at": "2026-09-11"
     },
     {
-      "title": "Linux Kernel contains an improper check for unusual or exceptional conditions vulnerability in the TLS receive path which allows a zero-length record retrieved from the rx_list to ",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Linux Kernel This vulnerability affects an open-source component, third-party library, protocol, or proprietary implementation that could be used by different products. For more information, please see: ; https://git.kernel.org/stable/c/2902c3ebcca52ca845c03182000e8d71d3a5196f; https://git.kernel.org/stable/c/c09dd3773b5950e9cfb6c9b9a5f6e36d06c62677; https://git.kernel.org/stable/c/3439c15ae91a517cf3c650ea15a8987699416ad9; https://git.kernel.org/stable/c/29c0ce3c8cdb6dc5d61139c937f34cb888a6f42e;",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "title": "GitLab Community Edition and Enterprise Edition path traversal in repository commits API",
+      "category": "Secure Coding / Web Application Security",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Improper path confinement and missing authentication enforcement in the repository commits API allow unauthenticated users to read arbitrary files.",
+      "why_it_matters": "Path traversal remains a top OWASP vulnerability class; this real-world case demonstrates how missing input validation and auth enforcement combine for critical impact.",
+      "application": "Construct a controlled vulnerable web app to demonstrate path traversal, then implement path normalization, whitelist validation, and authentication middleware as a secure coding portfolio piece.",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-09-18"
+      "published_at": "2026-09-11"
     },
     {
-      "title": "Google Pixel devices contain an improper authorization vulnerability in the cellular modem. A logic error may allow an attacker to bypass permission checks and escalate privileges.",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Google Pixel https://source.android.com/docs/security/bulletin/pixel/2026/2026-09-01 ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-58704",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-09-16"
+      "title": "Obot: Server-Side Request Forgery via remote MCP server URL",
+      "category": "AI Defense / MCP Security",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "An SSRF vulnerability exists where a remote MCP server URL can be exploited to induce server-side requests.",
+      "why_it_matters": "As MCP (Model Context Protocol) adoption grows, AI agent security surfaces expand; SSRF in AI tooling is an emerging threat category requiring defensive research.",
+      "application": "Set up a local MCP server simulation to study SSRF vectors in AI agent architectures, implement URL allowlisting and egress filtering, and document findings as an AI defense portfolio project.",
+      "source_name": "GitHub Security Advisories",
+      "source_url": "https://github.com/advisories/GHSA-jgh3-fggc-mcpm",
+      "published_at": "2026-09-18T17:59:46Z"
     },
     {
-      "title": "Cisco Identity Services Engine (ISE) and Cisco ISE Passive Identity Connector (ISE-PIC) contain an incorrect use of privileged APIs vulnerability that could allow an unauthenticate",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Cisco Identity Services Engine https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ISE-ABP-VNSW7Tn5 ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-76460",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "title": "Cisco Identity Services Engine incorrect use of privileged APIs",
+      "category": "Network Security / Identity",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "An unauthenticated remote attacker can bypass the web-based management interface by exploiting incorrect use of privileged APIs.",
+      "why_it_matters": "Enterprise identity systems are critical infrastructure; API privilege misuse can lead to full network compromise and unauthorized access control bypass.",
+      "application": "Study privileged API design patterns, analyze authentication bypass techniques in network devices, and build a network security threat intelligence report as a portfolio deliverable.",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-09-16"
     }
   ],
   "experiment": {
-    "title": "Validar uma fonte em laboratório",
-    "objective": "Ler uma fonte coletada e registrar o impacto defensivo sem interagir com sistemas reais.",
+    "title": "Path Traversal Vulnerability Lab: Exploit, Analyze, and Mitigate",
+    "objective": "Demonstrate the path traversal vulnerability class (as seen in GitLab CVE-2026-85706) by deploying a controlled vulnerable application, exploiting it to read unauthorized files, then implementing and verifying secure coding mitigations.",
     "prerequisites": [
-      "Fonte original acessível",
-      "Ambiente de anotações",
-      "Escopo autorizado"
+      "Docker installed locally",
+      "Python 3.10+",
+      "Flask framework",
+      "Basic understanding of path traversal and input validation"
     ],
     "steps": [
-      "Escolher um sinal",
-      "Confirmar a informação na fonte original",
-      "Registrar impacto, mitigação e dúvida restante"
+      "Deploy an intentionally vulnerable Flask application in a Docker container that exposes a file-read endpoint with improper path confinement",
+      "Execute path traversal payloads (e.g., ../../etc/passwd) against the endpoint to confirm unauthorized file access",
+      "Analyze the vulnerable code to identify missing path normalization and authentication enforcement",
+      "Implement fixes: path normalization with os.path.realpath, whitelist-based directory restriction, and authentication middleware",
+      "Re-run exploitation attempts to verify all traversal vectors are blocked",
+      "Document findings, code diffs, and mitigation verification as a portfolio artifact"
     ],
     "expected_evidence": [
-      "Nota técnica com fonte",
-      "Escopo de validação documentado"
+      "Proof-of-concept output showing unauthorized file read before mitigation",
+      "Fixed source code with path normalization and auth enforcement",
+      "Test results confirming traversal attempts return 403 or sanitized paths",
+      "Written lab report with vulnerability analysis and remediation summary"
     ],
-    "stop_condition": "Parar se a atividade exigir acesso a um ativo não autorizado."
+    "stop_condition": "All path traversal vectors are blocked, secure coding patterns are verified through automated tests, and the lab report is complete."
   },
-  "discarded": "Síntese automática indisponível; nenhum fato adicional foi inventado.",
+  "discarded": "CISA KEV entries for Linux Kernel AF_ALG race condition, Linux Kernel ebtables SNAT out-of-bounds write, Google Pixel cellular modem authorization, Cisco ISE privileged APIs (selected instead), Acronis Backup privilege escalation, Cisco Secure Email Gateway SQL injection, ConnectWise ScreenConnect privilege management, JFrog Artifactory improper authentication (duplicate product), MikroTik RouterOS argument delimiter and missing authentication, Citrix NetScaler authentication bypass, Fortinet Fo",
   "backlog": [
-    "Revisar os sinais manualmente",
-    "Executar novamente no próximo ciclo",
-    "Manter o escopo defensivo"
+    "Linux Kernel AF_ALG socket race condition - deep kernel networking lab",
+    "MikroTik RouterOS command injection - network device security analysis",
+    "Fortinet FortiOS heap buffer overflow - binary exploitation study"
   ],
   "collection": {
     "items": 30,
@@ -95,7 +101,5 @@
       "OWASP: HTTPError"
     ]
   },
-  "status": "ok",
-  "last_failure_at": "2026-09-19T11:10:22-03:00",
-  "last_failure": "JSONDecodeError: Expecting ',' delimiter: line 16 column 6 (char 958)"
+  "status": "ok"
 }
