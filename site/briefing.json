@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T12:16:34-03:00",
+  "generated_at": "2026-09-24T12:41:51-03:00",
   "coverage_window": "Triagem local após falha de formatação da IA",
   "executive_summary": "A coleta foi concluída, mas a resposta do roteador gratuito não passou na validação JSON. Os sinais foram mantidos para revisão manual.",
   "signals": [
@@ -96,6 +96,6 @@
     ]
   },
   "status": "ok",
-  "last_failure_at": "2026-09-23T12:16:34-03:00",
+  "last_failure_at": "2026-09-24T12:41:51-03:00",
   "last_failure": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
 }
