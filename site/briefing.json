@@ -1,93 +1,98 @@
 {
-  "generated_at": "2026-10-03T12:02:57-03:00",
-  "coverage_window": "Triagem local após falha de formatação da IA",
-  "executive_summary": "A coleta foi concluída, mas a resposta do roteador gratuito não passou na validação JSON. Os sinais foram mantidos para revisão manual.",
+  "generated_at": "2026-10-04T12:38:59-03:00",
+  "coverage_window": "2026-10-01/2026-10-07",
+  "executive_summary": "Five recent, actionable security advisories covering privilege escalation, file write flaws, authentication bypass, container security, and DoS via SVG parsing. All are suitable for hands‑on lab exercises and portfolio projects.",
   "signals": [
     {
-      "title": "Zammad GmbH Zammad contains an improper privilege management vulnerability that can allow the local zammad user to escalate privileges to root. This vulnerability can be chained wi",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Zammad GmbH Zammad https://zammad.com/en/product/releases/ ; https://community.zammad.org/t/take-care-local-privilege-escalation-cve-2026-102490-is-reported-as-being-actively-exploited/21297/2 ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-102",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "title": "Zammad improper privilege management (CVE-2026-102490)",
+      "category": "Linux/Application Security",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Local zammad user can escalate privileges to root due to improper privilege management.",
+      "why_it_matters": "Privilege escalation gives full system control, a common post‑exploitation goal.",
+      "application": "Deploy a Zammad instance in a VM, reproduce the escalation, and practice detection with audit logs and SELinux/AppArmor policies.",
       "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-102490",
       "published_at": "2026-10-02"
     },
     {
-      "title": "Zammad GmbH Zammad contains a session fixation vulnerability that can lead to remote code execution as the zammad user. This vulnerability can be chained with CVE-2026-102490.",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Zammad GmbH Zammad https://zammad.com/en/product/releases/ ; https://community.zammad.org/t/take-care-local-privilege-escalation-cve-2026-102490-is-reported-as-being-actively-exploited/21297/2 ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-102",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "title": "Fortinet FortiMail path traversal & NULL byte (CVE-2026-104286)",
+      "category": "Network Security / Cloud Security",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Unauthenticated attacker can write arbitrary files via crafted HTTP/HTTPS requests using path traversal and NULL‑byte tricks.",
+      "why_it_matters": "Arbitrary file write can lead to remote code execution and system compromise.",
+      "application": "Spin up a FortiMail sandbox, craft malicious requests, and verify mitigations such as input validation and path canonicalization.",
       "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-10-02"
-    },
-    {
-      "title": "Fortinet FortiMail contains a path traversal and an improper neutralization of NULL byte or NULL character vulnerability that may allow an unauthenticated attacker to write arbitra",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Fortinet FortiMail https://fortiguard.fortinet.com/psirt/FG-IR-26-175 ; ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-104286",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-104286",
       "published_at": "2026-10-01"
     },
     {
-      "title": "Cisco Catalyst SD-WAN Manager contains a hex encoding vulnerability that could allow an unauthenticated, remote attacker to access an affected system with privileges of the admin u",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Cisco Catalyst SD-WAN Manager https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-sdwan-webauth-xr8beuuU ; ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-76504",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "title": "Cisco Catalyst SD‑WAN Manager hex‑encoding handling (CVE-2026-76504)",
+      "category": "Cloud / Network Security",
+      "relevance": "media",
+      "confidence": "alta",
+      "what_changed": "Improper URI hex‑encoding handling lets an unauthenticated remote attacker obtain admin‑level access.",
+      "why_it_matters": "Admin access enables configuration changes and data exfiltration.",
+      "application": "Use a SD‑WAN manager VM, test URI encoding bypasses, and implement strict request parsing and authentication checks.",
       "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-76504",
       "published_at": "2026-09-30"
     },
     {
-      "title": "Apple iOS, macOS, and iPadOS contain an out-of-bounds write vulnerability in CoreGraphics that may lead to arbitrary code execution.",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Apple Multiple Products https://support.apple.com/en-us/149226 ; https://support.apple.com/en-us/149228 ; https://support.apple.com/en-us/149229 ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-86950",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-09-29"
+      "title": "gitea‑runner passes host namespaces/capabilities when privileged mode disabled (GHSA‑x4q3‑gcj3‑m6cf)",
+      "category": "DevOps / Container Security",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Workflow container.options propagates host namespaces and capability flags even though privileged mode is off.",
+      "why_it_matters": "Potential container breakout and host compromise.",
+      "application": "Create a Gitea runner container, inspect the options, and enforce secure defaults (drop unnecessary namespaces/capabilities).",
+      "source_name": "GitHub Security Advisories",
+      "source_url": "https://github.com/advisories/GHSA-x4q3-gcj3-m6cf",
+      "published_at": "2026-10-02T23:18:12Z"
+    },
+    {
+      "title": "probe‑image‑size quadratic‑time DoS in SVG parser (GHSA‑gjj5‑9665‑rwrc)",
+      "category": "Secure Coding / Application Security",
+      "relevance": "media",
+      "confidence": "media",
+      "what_changed": "SVG parser processes specially crafted SVGs with quadratic time complexity, causing CPU exhaustion.",
+      "why_it_matters": "Denial‑of‑service via resource exhaustion impacts availability.",
+      "application": "Build a small Node.js service using probe‑image‑size, feed malicious SVGs, and implement rate limiting and input sanitization.",
+      "source_name": "GitHub Security Advisories",
+      "source_url": "https://github.com/advisories/GHSA-gjj5-9665-rwrc",
+      "published_at": "2026-10-02T23:18:02Z"
     }
   ],
   "experiment": {
-    "title": "Validar uma fonte em laboratório",
-    "objective": "Ler uma fonte coletada e registrar o impacto defensivo sem interagir com sistemas reais.",
+    "title": "Lab: Privilege Escalation & File Write Chains in Zammad & FortiMail",
+    "objective": "Reproduce two CISA‑tracked vulnerabilities (Zammad LPE and FortiMail path traversal) in isolated VMs to practice detection, exploitation, and mitigation.",
     "prerequisites": [
-      "Fonte original acessível",
-      "Ambiente de anotações",
-      "Escopo autorizado"
+      "VirtualBox or VMware Workstation",
+      "Ubuntu 22.04 host with virtualization enabled",
+      "Docker (optional, for container tests)"
     ],
     "steps": [
-      "Escolher um sinal",
-      "Confirmar a informação na fonte original",
-      "Registrar impacto, mitigação e dúvida restante"
+      "1. Spin up two VMs: Zammad (latest stable) and FortiMail (trial image).",
+      "2. Update both to the latest patches to confirm vendor fixes.",
+      "3. For Zammad: enable debug logging, create a low‑privilege zammad user, and run a script that attempts to abuse the improper privilege management (e.g., set‑uid binary). Capture logs showing root access.",
+      "4. For FortiMail: craft a malicious HTTP request with path traversal and NULL‑byte to write a test file to /var/www/html/. Use curl with encoded payloads.",
+      "5. Verify file creation and execute the file to confirm RCE potential.",
+      "6. Document findings, create a remediation plan (input validation, principle of least privilege, patched versions).",
+      "7. Clean up VMs and export evidence (screenshots, logs, request/response) for portfolio."
     ],
     "expected_evidence": [
-      "Nota técnica com fonte",
-      "Escopo de validação documentado"
+      "Zammad logs showing root‑level process execution from zammad user.",
+      "FortiMail filesystem listing confirming arbitrary file write.",
+      "Proof‑of‑concept request/responses and remediation checklist."
     ],
-    "stop_condition": "Parar se a atividade exigir acesso a um ativo não autorizado."
+    "stop_condition": "All steps completed or 60 minutes elapsed, whichever comes first."
   },
-  "discarded": "Síntese automática indisponível; nenhum fato adicional foi inventado.",
+  "discarded": "",
   "backlog": [
-    "Revisar os sinais manualmente",
-    "Executar novamente no próximo ciclo",
-    "Manter o escopo defensivo"
+    "Citrix NetScaler ADC multiple buffer/input validation flaws",
+    "Mikrotik RouterOS session channel exec chain",
+    "Microsoft SharePoint code injection"
   ],
   "collection": {
     "items": 30,
@@ -95,7 +100,5 @@
       "OWASP: HTTPError"
     ]
   },
-  "status": "ok",
-  "last_failure_at": "2026-10-03T12:02:57-03:00",
-  "last_failure": "ValueError: Resposta do OpenRouter sem texto"
+  "status": "ok"
 }
