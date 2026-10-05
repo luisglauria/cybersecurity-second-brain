@@ -1,98 +1,96 @@
 {
-  "generated_at": "2026-10-04T12:38:59-03:00",
-  "coverage_window": "2026-10-01/2026-10-07",
-  "executive_summary": "Five recent, actionable security advisories covering privilege escalation, file write flaws, authentication bypass, container security, and DoS via SVG parsing. All are suitable for hands‑on lab exercises and portfolio projects.",
+  "generated_at": "2026-10-05T16:30:40-03:00",
+  "coverage_window": "2026-09-22 to 2026-10-05",
+  "executive_summary": "CISA and GitHub report 15 active vulnerabilities across web apps, cloud, and containers. Focus on 5 with lab-testable scenarios for portfolio projects.",
   "signals": [
     {
-      "title": "Zammad improper privilege management (CVE-2026-102490)",
-      "category": "Linux/Application Security",
+      "title": "WordPress Core Remote File Inclusion (CVE-2026-87902)",
+      "category": "Web Application Security",
       "relevance": "alta",
       "confidence": "alta",
-      "what_changed": "Local zammad user can escalate privileges to root due to improper privilege management.",
-      "why_it_matters": "Privilege escalation gives full system control, a common post‑exploitation goal.",
-      "application": "Deploy a Zammad instance in a VM, reproduce the escalation, and practice detection with audit logs and SELinux/AppArmor policies.",
+      "what_changed": "Improper sanitization allows local .php file inclusion via page-template resolution",
+      "why_it_matters": "Enables RCE in unpatched WordPress instances; common in portfolio projects",
+      "application": "Deploy vulnerable WordPress in Docker; test path traversal payloads in theme templates",
       "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-102490",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-09-25"
+    },
+    {
+      "title": "Zammad Privilege Escalation (CVE-2026-102490)",
+      "category": "Privilege Management",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Local zammad user can escalate to root via improper privilege checks",
+      "why_it_matters": "Demonstrates privilege chain attacks; relevant for Linux security studies",
+      "application": "Run Zammad in VM; exploit session fixation (CVE-2026-102489) then escalate privileges",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-10-02"
     },
     {
-      "title": "Fortinet FortiMail path traversal & NULL byte (CVE-2026-104286)",
-      "category": "Network Security / Cloud Security",
+      "title": "gitea-runner Container Namespace Leak (GHSA-x4q3-gcj3-m6cf)",
+      "category": "Cloud Container Security",
       "relevance": "alta",
       "confidence": "alta",
-      "what_changed": "Unauthenticated attacker can write arbitrary files via crafted HTTP/HTTPS requests using path traversal and NULL‑byte tricks.",
-      "why_it_matters": "Arbitrary file write can lead to remote code execution and system compromise.",
-      "application": "Spin up a FortiMail sandbox, craft malicious requests, and verify mitigations such as input validation and path canonicalization.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-104286",
-      "published_at": "2026-10-01"
-    },
-    {
-      "title": "Cisco Catalyst SD‑WAN Manager hex‑encoding handling (CVE-2026-76504)",
-      "category": "Cloud / Network Security",
-      "relevance": "media",
-      "confidence": "alta",
-      "what_changed": "Improper URI hex‑encoding handling lets an unauthenticated remote attacker obtain admin‑level access.",
-      "why_it_matters": "Admin access enables configuration changes and data exfiltration.",
-      "application": "Use a SD‑WAN manager VM, test URI encoding bypasses, and implement strict request parsing and authentication checks.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-76504",
-      "published_at": "2026-09-30"
-    },
-    {
-      "title": "gitea‑runner passes host namespaces/capabilities when privileged mode disabled (GHSA‑x4q3‑gcj3‑m6cf)",
-      "category": "DevOps / Container Security",
-      "relevance": "alta",
-      "confidence": "alta",
-      "what_changed": "Workflow container.options propagates host namespaces and capability flags even though privileged mode is off.",
-      "why_it_matters": "Potential container breakout and host compromise.",
-      "application": "Create a Gitea runner container, inspect the options, and enforce secure defaults (drop unnecessary namespaces/capabilities).",
+      "what_changed": "Privileged mode disabled but host namespaces/capabilities still passed to job containers",
+      "why_it_matters": "Critical for CI/CD pipeline security; enables host-level container escapes",
+      "application": "Configure gitea-runner in Kubernetes; demonstrate host namespace access via crafted jobs",
       "source_name": "GitHub Security Advisories",
       "source_url": "https://github.com/advisories/GHSA-x4q3-gcj3-m6cf",
-      "published_at": "2026-10-02T23:18:12Z"
+      "published_at": "2026-10-02"
     },
     {
-      "title": "probe‑image‑size quadratic‑time DoS in SVG parser (GHSA‑gjj5‑9665‑rwrc)",
-      "category": "Secure Coding / Application Security",
-      "relevance": "media",
-      "confidence": "media",
-      "what_changed": "SVG parser processes specially crafted SVGs with quadratic time complexity, causing CPU exhaustion.",
-      "why_it_matters": "Denial‑of‑service via resource exhaustion impacts availability.",
-      "application": "Build a small Node.js service using probe‑image‑size, feed malicious SVGs, and implement rate limiting and input sanitization.",
+      "title": "probe-image-size SVG Parser DoS (GHSA-gjj5-9665-rwrc)",
+      "category": "Denial of Service",
+      "relevance": "média",
+      "confidence": "alta",
+      "what_changed": "Quadratic-time complexity in SVG parsing causes CPU exhaustion",
+      "why_it_matters": "Teaches resource exhaustion defense; applicable to image processing pipelines",
+      "application": "Generate malicious SVG files; test in local image processing service to trigger DoS",
       "source_name": "GitHub Security Advisories",
       "source_url": "https://github.com/advisories/GHSA-gjj5-9665-rwrc",
-      "published_at": "2026-10-02T23:18:02Z"
+      "published_at": "2026-10-02"
+    },
+    {
+      "title": "Fortinet FortiMail Path Traversal (CVE-2026-104286)",
+      "category": "File System Security",
+      "relevance": "média",
+      "confidence": "alta",
+      "what_changed": "NULL byte bypass allows arbitrary file write via crafted HTTP requests",
+      "why_it_matters": "Illustrates input validation failures; relevant for web server hardening",
+      "application": "Simulate FortiMail API in Flask; test path traversal payloads to write files outside webroot",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-10-01"
     }
   ],
   "experiment": {
-    "title": "Lab: Privilege Escalation & File Write Chains in Zammad & FortiMail",
-    "objective": "Reproduce two CISA‑tracked vulnerabilities (Zammad LPE and FortiMail path traversal) in isolated VMs to practice detection, exploitation, and mitigation.",
+    "title": "Defensive Testing: WordPress RFI Mitigation",
+    "objective": "Demonstrate secure coding practices to prevent CVE-2026-87902 exploitation",
     "prerequisites": [
-      "VirtualBox or VMware Workstation",
-      "Ubuntu 22.04 host with virtualization enabled",
-      "Docker (optional, for container tests)"
+      "Docker installed",
+      "WordPress Docker image",
+      "Basic PHP knowledge"
     ],
     "steps": [
-      "1. Spin up two VMs: Zammad (latest stable) and FortiMail (trial image).",
-      "2. Update both to the latest patches to confirm vendor fixes.",
-      "3. For Zammad: enable debug logging, create a low‑privilege zammad user, and run a script that attempts to abuse the improper privilege management (e.g., set‑uid binary). Capture logs showing root access.",
-      "4. For FortiMail: craft a malicious HTTP request with path traversal and NULL‑byte to write a test file to /var/www/html/. Use curl with encoded payloads.",
-      "5. Verify file creation and execute the file to confirm RCE potential.",
-      "6. Document findings, create a remediation plan (input validation, principle of least privilege, patched versions).",
-      "7. Clean up VMs and export evidence (screenshots, logs, request/response) for portfolio."
+      "1. Deploy vulnerable WordPress in Docker with default config",
+      "2. Create malicious .php file in /tmp/evil.php",
+      "3. Exploit via ?template=../../../tmp/evil to trigger RCE",
+      "4. Implement input validation: sanitize $_GET['template'] with basename() and realpath()",
+      "5. Add allowlist for valid template paths in wp-config.php"
     ],
     "expected_evidence": [
-      "Zammad logs showing root‑level process execution from zammad user.",
-      "FortiMail filesystem listing confirming arbitrary file write.",
-      "Proof‑of‑concept request/responses and remediation checklist."
+      "Successful RCE before mitigation",
+      "Blocked exploitation after fix",
+      "Code diff showing validation logic"
     ],
-    "stop_condition": "All steps completed or 60 minutes elapsed, whichever comes first."
+    "stop_condition": "Mitigation prevents file inclusion; no system access achieved"
   },
-  "discarded": "",
+  "discarded": "Citrix, Cisco, Apple, Microsoft, Arista, F5, WSO2, Adobe advisories - no lab-testable scenarios or duplicate CVEs",
   "backlog": [
-    "Citrix NetScaler ADC multiple buffer/input validation flaws",
-    "Mikrotik RouterOS session channel exec chain",
-    "Microsoft SharePoint code injection"
+    "SiYuan TLS key exposure",
+    "@orpc/zod prototype injection",
+    "Citrix memory buffer vulnerabilities"
   ],
   "collection": {
     "items": 30,
