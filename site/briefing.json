@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T14:57:22-03:00",
+  "generated_at": "2026-10-14T12:42:17-03:00",
   "coverage_window": "Triagem local após falha de formatação da IA",
   "executive_summary": "A coleta foi concluída, mas a resposta do roteador gratuito não passou na validação JSON. Os sinais foram mantidos para revisão manual.",
   "signals": [
@@ -9,6 +9,18 @@
       "relevance": "média",
       "confidence": "baixa",
       "what_changed": "Ivanti Connect Secure https:/forums.ivanti.com/s/article/Security-Advisory-Ivanti-Connect-Secure-CVE-2026-104935 ; https://nvd.nist.gov/vuln/detail/CVE-2026-104935",
+      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
+      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-10-13"
+    },
+    {
+      "title": "Microsoft Windows Shell contains a command injection vulnerability that allows an unauthorized attacker to bypass a security feature over a network.",
+      "category": "triagem manual",
+      "relevance": "média",
+      "confidence": "baixa",
+      "what_changed": "Microsoft Windows https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2026-96951 ; BOD 26-04: BOD 26-04: Prioritizing Security Updates Based on Risk | CISA ; Forensics Triage Requirements: BOD 26-04: Implementation Guidance for Prioritizing Security Updates Based on Risk | CISA ; https://nvd.nist.gov/vuln/detail/CVE-2026-96951",
       "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
       "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
       "source_name": "CISA Known Exploited Vulnerabilities",
@@ -50,18 +62,6 @@
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-10-08"
-    },
-    {
-      "title": "ONLYOFFICE Docs contains a path traversal vulnerability that can occur when JWT is used, via a /.. sequence in an image upload parameter and could allow for remote code execution.",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "ONLYOFFICE Docs This vulnerability could affect an open-source component, third-party library, protocol, or proprietary implementation that could be used by different products. For more information, please see: ; https://github.com/ONLYOFFICE/DocumentServer/blob/903fe5ab7a275bd69c3c3346af2d21cf87ebeabf/CHANGELOG.md#563 ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/direc",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-10-08"
     }
   ],
   "experiment": {
@@ -96,6 +96,6 @@
     ]
   },
   "status": "ok",
-  "last_failure_at": "2026-10-13T14:57:22-03:00",
-  "last_failure": "JSONDecodeError: Expecting ',' delimiter: line 16 column 6 (char 1364)"
+  "last_failure_at": "2026-10-14T12:42:17-03:00",
+  "last_failure": "ValueError: Resposta do OpenRouter sem texto"
 }
