@@ -1,93 +1,96 @@
 {
-  "generated_at": "2026-10-15T12:29:14-03:00",
-  "coverage_window": "Triagem local após falha de formatação da IA",
-  "executive_summary": "A coleta foi concluída, mas a resposta do roteador gratuito não passou na validação JSON. Os sinais foram mantidos para revisão manual.",
+  "generated_at": "2026-10-16T12:11:59-03:00",
+  "coverage_window": "2026-10-14 to 2026-10-15",
+  "executive_summary": "Five recent exploitable vulnerabilities were selected: file access in Atlassian products, command injection in Ahsay CBS, path traversal in Cisco Secure Email Gateway, reflected XSS in TanStack Router, and container sandbox bypass in Podman. Each offers concrete defensive learning opportunities for network, Linux, cloud, and secure coding practice.",
   "signals": [
     {
-      "title": "Ahsay AhsayCBS contains a command injection vulnerability that could allow a remote attacker to execute operating system commands via manipulation of the random parameter in the Re",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Ahsay AhsayCBS https://www.ahsay.com/en/company/announcements/patch-cve-105133-105134-update ; ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-105134",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "title": "Multiple Atlassian products contain a files or directories accessible to external parties vulnerability",
+      "category": "Vulnerabilidade de Acesso a Arquivos",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Usuário não autenticado pode ler arquivos dentro do diretório raiz da aplicação web",
+      "why_it_matters": "Permite exposição de configurações sensíveis e credenciais",
+      "application": "Laboratório de teste de detecção de path traversal e criação de regras WAF",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-10-15"
+    },
+    {
+      "title": "Ahsay AhsayCBS contains a command injection vulnerability via manipulation of the random parameter",
+      "category": "Injeção de Comando",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Parâmetro random no endpoint /rps/api/json/UpdateReceivers.do permite execução de comandos do SO",
+      "why_it_matters": "Pode levar a compromisso total do servidor",
+      "application": "Construir endpoint intencionalmente vulnerável em container para praticar validação de entrada e uso seguro de subprocess",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-10-14"
     },
     {
-      "title": "Cisco Secure Email Gateway contains a relative path traversal vulnerability that could allow an unauthenticated, remote attacker to write arbitrary files on the underlying operatin",
-      "category": "triagem manual",
+      "title": "Cisco Secure Email Gateway contains a relative path traversal vulnerability",
+      "category": "Path Traversal",
       "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Cisco Secure Email Gateway https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-esa-afw-zqYJkjxp ; ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-76519",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "confidence": "média",
+      "what_changed": "Atacante remoto não autenticado pode escrever arquivos arbitrários no sistema operacional subjacente",
+      "why_it_matters": "Permite persistência e execução de código malicioso",
+      "application": "Teste de sanitização de upload de arquivo e aplicação de políticas SELinux/AppArmor",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-10-14"
     },
     {
-      "title": "Ahsay AhsayCBS contains an improper authentication vulnerability that could allow a remote attacker to bypass authentication via manipulation of the random parameter in the API com",
-      "category": "triagem manual",
+      "title": "TanStack Router: Unauthenticated reflected XSS in TanStack Start server-function responses",
+      "category": "XSS Refletido",
       "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Ahsay AhsayCBS https://www.ahsay.com/en/company/announcements/patch-cve-105133-105134-update ; ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-105133",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-10-14"
+      "confidence": "média",
+      "what_changed": "Respostas de funções de servidor refletem entrada do usuário sem escape, permitindo execução de script no navegador",
+      "why_it_matters": "Roubo de sessão e execução de ações não autorizadas no contexto do usuário",
+      "application": "Implementar CSP, codificação de saída e testes de segurança em projeto frontend",
+      "source_name": "GitHub Security Advisories",
+      "source_url": "https://github.com/advisories/GHSA-qx66-fv34-fjm8",
+      "published_at": "2026-10-15T20:22:20Z"
     },
     {
-      "title": "Palo Alto Networks PAN-OS contains a code injection vulnerability that could allow an authenticated attacker with network access to execute arbitrary code with root privileges on t",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Palo Alto Networks PAN-OS https://security.paloaltonetworks.com/CVE-2026-0322 ; ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-0322",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-10-14"
-    },
-    {
-      "title": "Ivanti Connect Secure contains an authentication bypass by spoofing vulnerability that allows a remote unauthenticated attacker to execute arbitrary commands.",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Ivanti Connect Secure https:/forums.ivanti.com/s/article/Security-Advisory-Ivanti-Connect-Secure-CVE-2026-104935 ; https://nvd.nist.gov/vuln/detail/CVE-2026-104935",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-10-13"
+      "title": "Podman: The `podman run` command can be instructed to disable almost all sandboxing by image annotation",
+      "category": "Segurança de Containers",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "Anotação de imagem pode desativar seccomp, namespaces e outros mecanismos de isolamento",
+      "why_it_matters": "Aumenta risco de escape de container e elevação de privilégios no host",
+      "application": "Validar perfis de segurança, usar admission control e auditar logs de execução de containers",
+      "source_name": "GitHub Security Advisories",
+      "source_url": "https://github.com/advisories/GHSA-2cvf-wqm6-wr9g",
+      "published_at": "2026-10-15T20:22:16Z"
     }
   ],
   "experiment": {
-    "title": "Validar uma fonte em laboratório",
-    "objective": "Ler uma fonte coletada e registrar o impacto defensivo sem interagir com sistemas reais.",
+    "title": "Detecção e mitigação de injeção de comando em endpoint simulado",
+    "objective": "Validar que validação de entrada e uso seguro de subprocessos impedem execução não autorizada de comandos do SO",
     "prerequisites": [
-      "Fonte original acessível",
-      "Ambiente de anotações",
-      "Escopo autorizado"
+      "Docker Engine",
+      "Python 3.9+",
+      "curl ou httpie"
     ],
     "steps": [
-      "Escolher um sinal",
-      "Confirmar a informação na fonte original",
-      "Registrar impacto, mitigação e dúvida restante"
+      "1. Criar imagem Docker com um aplicativo Flask vulnerável que reproduz o comportamento do parâmetro 'random' do Ahsay CBS (executa subprocess.call(user_input, shell=True)).",
+      "2. Executar o container expondo a porta 5000.",
+      "3. Enviar requisição GET com payload '; id' no parâmetro random e observar a saída do comando 'id' nos logs do container.",
+      "4. Aplicar correção: substituir shell=True por lista de argumentos e validar que o entrada contém apenas alfanuméricos.",
+      "5. Reconstruir imagem, reiniciar container e repetir a mesma requisição maliciosa.",
+      "6. Verificar que nenhum comando externo é executado e que a aplicação retorna erro de validação."
     ],
     "expected_evidence": [
-      "Nota técnica com fonte",
-      "Escopo de validação documentado"
+      "Logs do container mostrando execução do comando 'id' antes da correção.",
+      "Ausência de execução de comando externo e presença de mensagem de erro após a correção."
     ],
-    "stop_condition": "Parar se a atividade exigir acesso a um ativo não autorizado."
+    "stop_condition": "Quando a mitigação for confirmada ou após 45 minutos de esforço."
   },
-  "discarded": "Síntese automática indisponível; nenhum fato adicional foi inventado.",
+  "discarded": "Outros sinais foram descartados por serem menos recentes, duplicados em tema (ex.: múltiplos CVEs de Ahsay CBS) ou por não oferecerem aplicação prática imediata em laboratório defensivo.",
   "backlog": [
-    "Revisar os sinais manualmente",
-    "Executar novamente no próximo ciclo",
-    "Manter o escopo defensivo"
+    "Teste de detecção de path traversal em Cisco Secure Email Gateway usando proxy interceptor.",
+    "Análise de logs de seccomp para identificar tentativa de dessandboxing em Podman.",
+    "Implementação de regras de WAF para bloquear payloads de XSS refletido em TanStack Router."
   ],
   "collection": {
     "items": 30,
@@ -95,7 +98,5 @@
       "OWASP: HTTPError"
     ]
   },
-  "status": "ok",
-  "last_failure_at": "2026-10-15T12:29:14-03:00",
-  "last_failure": "JSONDecodeError: Expecting ',' delimiter: line 52 column 6 (char 3113)"
+  "status": "ok"
 }
