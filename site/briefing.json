@@ -1,96 +1,94 @@
 {
-  "generated_at": "2026-10-16T12:11:59-03:00",
-  "coverage_window": "2026-10-14 to 2026-10-15",
-  "executive_summary": "Five recent exploitable vulnerabilities were selected: file access in Atlassian products, command injection in Ahsay CBS, path traversal in Cisco Secure Email Gateway, reflected XSS in TanStack Router, and container sandbox bypass in Podman. Each offers concrete defensive learning opportunities for network, Linux, cloud, and secure coding practice.",
+  "generated_at": "2026-10-17T11:03:50-03:00",
+  "coverage_window": "2026-10-13 a 2026-10-16",
+  "executive_summary": "Cinco vulnerabilidades críticas de autenticação, injeção e acesso não autorizado foram priorizadas para estudo prático em ambientes de laboratório, com foco em mitigações defensivas e análise de código seguro.",
   "signals": [
     {
-      "title": "Multiple Atlassian products contain a files or directories accessible to external parties vulnerability",
-      "category": "Vulnerabilidade de Acesso a Arquivos",
+      "title": "BeyondTrust Remote Support: Autenticação por spoofing",
+      "category": "vulnerabilidades",
       "relevance": "alta",
       "confidence": "alta",
-      "what_changed": "Usuário não autenticado pode ler arquivos dentro do diretório raiz da aplicação web",
-      "why_it_matters": "Permite exposição de configurações sensíveis e credenciais",
-      "application": "Laboratório de teste de detecção de path traversal e criação de regras WAF",
+      "what_changed": "CVE-2026-10276 adicionada à lista de exploração conhecida da CISA.",
+      "why_it_matters": "Permite execução remota de comandos sem credenciais, destacando falhas em mecanismos de autenticação.",
+      "application": "Implementar validação de tokens e testes de penetração em sistemas de acesso remoto.",
       "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10276",
+      "published_at": "2026-10-16"
+    },
+    {
+      "title": "Fortinet: Path traversal em CLI",
+      "category": "vulnerabilidades",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "CVE-2025-61624 expõe escrita/ deleção de arquivos via comandos CLI.",
+      "why_it_matters": "Permite manipulação de arquivos críticos, comum em sistemas de rede e cloud.",
+      "application": "Auditar permissões de arquivos e validar entradas em APIs de gerenciamento.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2025-61624",
+      "published_at": "2026-10-16"
+    },
+    {
+      "title": "Atlassian: Acesso a arquivos não autenticado",
+      "category": "vulnerabilidades",
+      "relevance": "alta",
+      "confidence": "alta",
+      "what_changed": "CVE-2026-21589 afeta múltiplos produtos Data Center.",
+      "why_it_matters": "Exposição de dados sensíveis via endpoints web mal protegidos.",
+      "application": "Configurar permissões de diretórios e validar rotas em aplicações web.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21589",
       "published_at": "2026-10-15"
     },
     {
-      "title": "Ahsay AhsayCBS contains a command injection vulnerability via manipulation of the random parameter",
-      "category": "Injeção de Comando",
+      "title": "Ahsay AhsayCBS: Injeção de comandos",
+      "category": "vulnerabilidades",
       "relevance": "alta",
       "confidence": "alta",
-      "what_changed": "Parâmetro random no endpoint /rps/api/json/UpdateReceivers.do permite execução de comandos do SO",
-      "why_it_matters": "Pode levar a compromisso total do servidor",
-      "application": "Construir endpoint intencionalmente vulnerável em container para praticar validação de entrada e uso seguro de subprocess",
+      "what_changed": "CVE-2026-105134 permite execução de comandos via parâmetro 'random'.",
+      "why_it_matters": "Vetor comum em APIs mal validadas, com impacto em sistemas de backup.",
+      "application": "Usar sanitização de entradas e evitar execução direta de comandos em APIs.",
       "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "source_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-105134",
       "published_at": "2026-10-14"
     },
     {
-      "title": "Cisco Secure Email Gateway contains a relative path traversal vulnerability",
-      "category": "Path Traversal",
-      "relevance": "média",
-      "confidence": "média",
-      "what_changed": "Atacante remoto não autenticado pode escrever arquivos arbitrários no sistema operacional subjacente",
-      "why_it_matters": "Permite persistência e execução de código malicioso",
-      "application": "Teste de sanitização de upload de arquivo e aplicação de políticas SELinux/AppArmor",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-10-14"
-    },
-    {
-      "title": "TanStack Router: Unauthenticated reflected XSS in TanStack Start server-function responses",
-      "category": "XSS Refletido",
-      "relevance": "média",
-      "confidence": "média",
-      "what_changed": "Respostas de funções de servidor refletem entrada do usuário sem escape, permitindo execução de script no navegador",
-      "why_it_matters": "Roubo de sessão e execução de ações não autorizadas no contexto do usuário",
-      "application": "Implementar CSP, codificação de saída e testes de segurança em projeto frontend",
-      "source_name": "GitHub Security Advisories",
-      "source_url": "https://github.com/advisories/GHSA-qx66-fv34-fjm8",
-      "published_at": "2026-10-15T20:22:20Z"
-    },
-    {
-      "title": "Podman: The `podman run` command can be instructed to disable almost all sandboxing by image annotation",
-      "category": "Segurança de Containers",
+      "title": "LMCache: RCE via desserialização insegura",
+      "category": "IA defensiva",
       "relevance": "alta",
       "confidence": "alta",
-      "what_changed": "Anotação de imagem pode desativar seccomp, namespaces e outros mecanismos de isolamento",
-      "why_it_matters": "Aumenta risco de escape de container e elevação de privilégios no host",
-      "application": "Validar perfis de segurança, usar admission control e auditar logs de execução de containers",
+      "what_changed": "GHSA-w5f2-9q9c-ff4h afeta modos multiprocesso em bibliotecas de cache de IA.",
+      "why_it_matters": "Risco crescente em pipelines de ML com componentes não validados.",
+      "application": "Validar formatos de serialização e usar bibliotecas seguras em projetos de IA.",
       "source_name": "GitHub Security Advisories",
-      "source_url": "https://github.com/advisories/GHSA-2cvf-wqm6-wr9g",
-      "published_at": "2026-10-15T20:22:16Z"
+      "source_url": "https://github.com/advisories/GHSA-w5f2-9q9c-ff4h",
+      "published_at": "2026-10-16"
     }
   ],
   "experiment": {
-    "title": "Detecção e mitigação de injeção de comando em endpoint simulado",
-    "objective": "Validar que validação de entrada e uso seguro de subprocessos impedem execução não autorizada de comandos do SO",
+    "title": "Simulação de Path Traversal em Aplicação Web Local",
+    "objective": "Identificar e mitigar uma vulnerabilidade de path traversal usando uma aplicação web deliberadamente vulnerável.",
     "prerequisites": [
-      "Docker Engine",
-      "Python 3.9+",
-      "curl ou httpie"
+      "Docker instalado",
+      "Acesso a terminal Linux",
+      "Conhecimento básico de HTTP"
     ],
     "steps": [
-      "1. Criar imagem Docker com um aplicativo Flask vulnerável que reproduz o comportamento do parâmetro 'random' do Ahsay CBS (executa subprocess.call(user_input, shell=True)).",
-      "2. Executar o container expondo a porta 5000.",
-      "3. Enviar requisição GET com payload '; id' no parâmetro random e observar a saída do comando 'id' nos logs do container.",
-      "4. Aplicar correção: substituir shell=True por lista de argumentos e validar que o entrada contém apenas alfanuméricos.",
-      "5. Reconstruir imagem, reiniciar container e repetir a mesma requisição maliciosa.",
-      "6. Verificar que nenhum comando externo é executado e que a aplicação retorna erro de validação."
+      "Baixar e executar o container DVWA (Damn Vulnerable Web Application) via Docker.",
+      "Acessar a página de 'File Inclusion' no DVWA e tentar navegar para arquivos do sistema (ex: /etc/passwd).",
+      "Documentar o payload usado e o resultado da exploração.",
+      "Implementar uma validação de caminho em um script Python simples para bloquear tentativas de traversal."
     ],
     "expected_evidence": [
-      "Logs do container mostrando execução do comando 'id' antes da correção.",
-      "Ausência de execução de comando externo e presença de mensagem de erro após a correção."
+      "Captura de tela do arquivo /etc/passwd acessado via DVWA.",
+      "Código Python com função de sanitização de caminhos."
     ],
-    "stop_condition": "Quando a mitigação for confirmada ou após 45 minutos de esforço."
+    "stop_condition": "Mitigação validada com payloads bloqueados no script Python."
   },
-  "discarded": "Outros sinais foram descartados por serem menos recentes, duplicados em tema (ex.: múltiplos CVEs de Ahsay CBS) ou por não oferecerem aplicação prática imediata em laboratório defensivo.",
+  "discarded": "Vulnerabilidades repetidas (Ahsay autenticação), CVEs antigos (Apache Struts, ProFTPD) e advisories de baixa relevância prática para estudo inicial.",
   "backlog": [
-    "Teste de detecção de path traversal em Cisco Secure Email Gateway usando proxy interceptor.",
-    "Análise de logs de seccomp para identificar tentativa de dessandboxing em Podman.",
-    "Implementação de regras de WAF para bloquear payloads de XSS refletido em TanStack Router."
+    "Estudar CVE-2026-0322 (Palo Alto PAN-OS) para análise de injeção de código em firewalls.",
+    "Avaliar GHSA-pw5q-rjx4-7f7p (Arcane) para testes de privilege escalation em APIs.",
+    "Praticar mitigações para deserialização insegura em aplicações Python."
   ],
   "collection": {
     "items": 30,
