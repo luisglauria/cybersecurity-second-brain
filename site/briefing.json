@@ -1,8 +1,32 @@
 {
-  "generated_at": "2026-10-30T13:55:57-03:00",
+  "generated_at": "2026-10-31T12:57:19-03:00",
   "coverage_window": "Triagem local após falha de formatação da IA",
   "executive_summary": "A coleta foi concluída, mas a resposta do roteador gratuito não passou na validação JSON. Os sinais foram mantidos para revisão manual.",
   "signals": [
+    {
+      "title": "Ivanti Connect Secure contains a generation of predictable numbers or identifiers vulnerability that allows a remote authenticated attacker to upload files with attacker-controlled",
+      "category": "triagem manual",
+      "relevance": "média",
+      "confidence": "baixa",
+      "what_changed": "Ivanti Connect Secure https://hub.ivanti.com/s/article/Security-Advisory-Ivanti-Connect-Secure-CVE-2026-104935?language=en_US ; ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-118527",
+      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
+      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-10-30"
+    },
+    {
+      "title": "Ivanti Connect Secure contains a missing authentication for critical function vulnerability that could allow a local authenticated attacker to escalate their privileges. This vulne",
+      "category": "triagem manual",
+      "relevance": "média",
+      "confidence": "baixa",
+      "what_changed": "Ivanti Connect Secure https://hub.ivanti.com/s/article/Security-Advisory-Ivanti-Connect-Secure-CVE-2026-104935?language=en_US ; https://www.cisa.gov/news-events/alerts/2026/10/13/cisa-urges-patching-newly-exploited-vulnerability-ivanti-connect-secure ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-",
+      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
+      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-10-30"
+    },
     {
       "title": "GitLab Community Edition and Enterprise Edition contain a integer overflow or wraparound vulnerability that could allow an unauthenticated user to execute arbitrary code on the Git",
       "category": "triagem manual",
@@ -38,30 +62,6 @@
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-10-28"
-    },
-    {
-      "title": "Linux Kernel contains a missing initialization of a variable vulnerability that could allow for unintended modification of page-cache-backed data via failure to preserve the shared",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Linux Kernel This vulnerability affects an open-source component, third-party library, protocol, or proprietary implementation that could be used by different products. For more information, please see: ; https://git.kernel.org/stable/c/3599e6b3cc1ada96883d496a50a210d3afbb6987 ; https://git.kernel.org/stable/c/2f2b16022a2e10ca7bccfb98db5ed2ec0f72641c ; https://git.kernel.org/stable/c/9d3e5fd19fe1063bf607219e8562fbd567b8e8d5 ; https://git.kernel.org/stable/c/78bf6b6bb19541d19fbda6242e7cfe2c682763",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-10-28"
-    },
-    {
-      "title": "Adobe Commerce and Magento contain an unrestricted upload of file with dangerous type vulnerability that could result in arbitrary code execution in the context of the current user",
-      "category": "triagem manual",
-      "relevance": "média",
-      "confidence": "baixa",
-      "what_changed": "Adobe Commerce and Magento https://www.adobe.com/trust/security/products/commerce/apsb26-73.html ; ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-48356",
-      "why_it_matters": "O item foi coletado, mas precisa de leitura manual porque a resposta estruturada da IA não foi validada.",
-      "application": "Ler a fonte original em ambiente autorizado e registrar uma conclusão técnica curta.",
-      "source_name": "CISA Known Exploited Vulnerabilities",
-      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-10-27"
     }
   ],
   "experiment": {
@@ -96,6 +96,6 @@
     ]
   },
   "status": "ok",
-  "last_failure_at": "2026-10-30T13:55:57-03:00",
-  "last_failure": "JSONDecodeError: Unterminated string starting at: line 14 column 7 (char 805)"
+  "last_failure_at": "2026-10-31T12:57:19-03:00",
+  "last_failure": "JSONDecodeError: Expecting ',' delimiter: line 40 column 6 (char 2558)"
 }
