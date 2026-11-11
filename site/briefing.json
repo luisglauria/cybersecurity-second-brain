@@ -1,95 +1,98 @@
 {
-  "generated_at": "2026-11-10T15:28:24-03:00",
-  "coverage_window": "2026-10-28 to 2026-11-10",
-  "executive_summary": "Recent CISA KEV and GitHub advisories reveal critical authentication bypass, code injection, and XSS issues affecting cloud, Linux, and web services, providing practical material for defensive labs and secure coding exercises.",
+  "generated_at": "2026-11-11T15:21:18-03:00",
+  "coverage_window": "2026-10- probably 2026-10-30 to 2026-11-11",
+  "executive_summary": "Recent CISA alerts highlight critical auth bypasses, command injection, and race conditions across Linux, cloud, and web platforms. Focus on OpenSSH, GPUStack, WordPress, Barracuda, and Chromium for hands‑on lab practice.",
   "signals": [
     {
-      "title": "GPUStack improper authentication vulnerability",
+      "title": "OpenBSD OpenSSH authentication bypass (Linux)",
+      "category": "networking/Linux",
+      "relevance": "high",
+      "confidence": "high",
+      "what_changed": "Unexpected status code in SSH protocol flow allowing auth bypass.",
+      "why_it_matters": "Attackers can log in without credentials, compromising remote servers.",
+      "application": "Build a lab OpenSSH server, apply a vulnerable version, and verify bypass with crafted packets; document detection and mitigation.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-11-09"
+    },
+    {
+      "title": "GPUStack unauthenticated administrative access",
       "category": "cloud security",
-      "relevance": "alta",
-      "confidence": "alta",
-      "what_changed": "CISA added GPUStack to Known Exploited Vulnerabilities on 2026-11-09",
-      "why_it_matters": "Allows unauthenticated admin access and code execution in GPUStack deployments, impacting cloud workloads",
-      "application": "Test authentication hardening in containerized GPU workloads",
+      "relevance": "high",
+      "confidence": "high",
+      "what_changed": "Missing authentication on POST /v2/inference‑backends/from‑yaml.",
+      "why_it_matters": "Full compromise of inference clusters, secret leakage, and code execution.",
+      "application": "Deploy GPUStack in a container, send unauthenticated admin request, observe API‑key creation and secret disclosure; write a detection script.",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
       "published_at": "2026-11-09"
     },
     {
-      "title": "OpenSSH password authentication bypass",
-      "category": "linux",
-      "relevance": "alta",
-      "confidence": "alta",
-      "what_changed": "CISA added OpenSSH vulnerability to KEV on 2026-11-09",
-      "why_it_matters": "Enables authentication bypass via unexpected status code, affecting SSH services",
-      "application": "Create a lab to verify SSH login without valid credentials using crafted packets",
+      "title": "WordPress Core TOCTOU race condition RCE",
+      "category": "web application security",
+      "relevance": "high",
+      "confidence": "medium",
+      "what_changed": "Predictable staging paths during core upgrades enable unauthenticated RCE.",
+      "why_it_matters": "Attackers can execute code on the server during the upgrade window.",
+      "application": "Spin up a WP test site, simulate upgrade race, craft malicious upgrade package, verify code execution; produce a proof‑of‑concept report.",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-11-09"
+      "published_at": "2026-11-03"
     },
     {
-      "title": "SignalWire FreeSwitch code injection",
-      "category": "network services",
-      "relevance": "alta",
-      "confidence": "alta",
-      "what_changed": "CISA added FreeSwitch vulnerability to KEV on 2026-11-09",
-      "why_it_matters": "Permits arbitrary command execution and credential disclosure via configuration",
-      "application": "Perform input validation testing on SIP server configurations",
+      "title": "Barracuda Networks OS command injection via timezone",
+      "category": "OS command injection",
+      "relevance": "high",
+      "confidence": "high",
+      "what_changed": "Crafted timezone value triggers root‑privileged command execution.",
+      "why_it_matters": "Authenticated admin can run arbitrary commands with root privileges.",
+      "application": "Run a Barracuda ESG VM (or a simulated service), inject a malicious timezone, confirm command execution, and document detection.",
       "source_name": "CISA Known Exploited Vulnerabilities",
       "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-      "published_at": "2026-11-09"
+      "published_at": "2026-11-10"
     },
     {
-      "title": "OHIF Viewers DOM-based XSS via MIME type",
-      "category": "web security",
-      "relevance": "alta",
-      "confidence": "alta",
-      "what_changed": "GitHub Security Advisory published 2026-11-10",
-      "why_it_matters": "Allows XSS attacks when MIME type is manipulated, affecting web applications",
-      "application": "Implement MIME type validation and output encoding in web projects",
-      "source_name": "GitHub Security Advisories",
-      "source_url": "https://github.com/advisories/GHSA-xwgp-w3pj-q5h3",
-      "published_at": "2026-11-10T15:57:51Z"
-    },
-    {
-      "title": "Forge ASN.1 BIT STRING resource exhaustion",
-      "category": "secure coding",
-      "relevance": "alta",
-      "confidence": "alta",
-      "what_changed": "GitHub Security Advisory published 2026-11-10",
-      "why_it_matters": "Can cause denial of service or code execution via crafted DER data",
-      "application": "Write defensive parsers that enforce length constraints on BIT STRING",
-      "source_name": "GitHub Security Advisories",
-      "source_url": "https://github.com/advisories/GHSA-rhr8-3pm8-cq29",
-      "published_at": "2026-11-10T15:57:41Z"
+      "title": "Google Chromium XML use‑after‑free sandbox bypass",
+      "category": "browser security",
+      "relevance": "medium",
+      "confidence": "high",
+      "what_changed": "Use‑after‑free in XML component allows sandbox escape via crafted webpage.",
+      "why_it_matters": "Arbitrary code execution in browsers that use Chromium engine.",
+      "application": "Set up a Chromium sandbox environment, craft malicious HTML/XML, test with sandboxie, and analyze exploit behavior.",
+      "source_name": "CISA Known Exploited Vulnerabilities",
+      "source_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "published_at": "2026-11-10"
     }
   ],
   "experiment": {
-    "title": "OpenSSH Authentication Bypass Lab",
-    "objective": "Demonstrate authentication bypass in SSH using crafted status code response",
+    "title": "Reproduce GPUStack unauthenticated admin access in a lab container",
+    "objective": "Demonstrate how missing authentication on GPUStack can be abused to gain administrative control and expose secrets.",
     "prerequisites": [
-      "Docker",
-      "Vulnerable OpenSSH container image",
-      "Network utility (e.g., netcat)"
+      "Docker installed",
+      "Git",
+      "Python 3",
+      "docker‑compose"
     ],
     "steps": [
-      "Start a vulnerable OpenSSH container exposing port 2222",
-      "From a separate host, send a malformed SSH handshake with unexpected status code to trigger bypass",
-      "Observe successful login without password authentication",
-      "Record the session and verify logs showing the unexpected status code"
+      "Clone GPUStack repo (git clone https://github.com/gpustack/gpustack.git)",
+      "Build container image with docker build .",
+      "Run container exposing port 8080",
+      "Send POST /v2/inference‑backends/from‑yaml without authentication using curl or Python script",
+      "Check for created admin API key and any secret leakage in logs",
+      "Document findings and create a detection rule"
     ],
     "expected_evidence": [
-      "Successful SSH session without valid credentials",
-      "Log entry indicating receipt of unexpected status code",
-      "Proof of concept captured in screenshots or logs"
+      "Admin API key printed in response or logs",
+      "Secrets (e.g., cloud provider keys) visible in container output",
+      "Successful creation of inference backend without auth"
     ],
-    "stop_condition": "Authentication bypass observed or 60 minutes elapsed"
+    "stop_condition": "Experiment stops when admin API key is created without authentication or after 5 minutes if no unauthorized access is achieved."
   },
-  "discarded": "Attacking live production systems, unrelated vulnerabilities, non‑lab environments",
+  "discarded": "Unused items not selected for signals.",
   "backlog": [
-    "Cisco ASA DoS",
-    "Linux Kernel variable init chain",
-    "Adobe Commerce file upload"
+    "Cisco BroadWorks XXE vulnerability",
+    "SignalWire FreeSwitch code injection",
+    "Apple iOS pointer authentication bypass"
   ],
   "collection": {
     "items": 30,
